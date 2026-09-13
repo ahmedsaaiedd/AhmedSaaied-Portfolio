@@ -1,0 +1,266 @@
+import { ArrowDownRight, ArrowRight, Code2, Gauge, Layers3, Link, MapPin, Orbit, Workflow } from "lucide-react"
+import type { CSSProperties } from "react"
+
+import { AmbientEffects } from "@/components/ambient-effects"
+import { CinematicIntro } from "@/components/cinematic-intro"
+import { CommandPalette } from "@/components/command-palette"
+import { CinematicEnding } from "@/components/cinematic-ending"
+import { HeroStage } from "@/components/hero-stage"
+import { MobilePortfolio } from "@/components/mobile-portfolio"
+import { ProjectAura } from "@/components/project-aura"
+import { ProjectShowcase } from "@/components/project-showcase"
+import { Reveal } from "@/components/reveal"
+import { SiteNav } from "@/components/site-nav"
+import { capabilities, projects } from "@/lib/portfolio"
+
+const process = [
+  {
+    number: "01",
+    title: "Find the real problem",
+    text: "I map the people, decisions, edge cases, and constraints before the interface starts pretending everything is simple.",
+  },
+  {
+    number: "02",
+    title: "Make the system visible",
+    text: "Flows, hierarchy, and states become a clear product model. The visual language grows from that structure.",
+  },
+  {
+    number: "03",
+    title: "Build the feeling",
+    text: "Responsive components, precise motion, and careful feedback turn static screens into a product that feels alive.",
+  },
+  {
+    number: "04",
+    title: "Pressure-test the details",
+    text: "Empty states, failures, long content, touch targets, performance, and real devices all get a seat at the table.",
+  },
+]
+
+export function PortfolioExperience() {
+  return (
+    <>
+      <a className="skip-link" href="#main-content">
+        Skip to content
+      </a>
+      <CinematicIntro />
+      <AmbientEffects />
+      <CommandPalette />
+      <SiteNav />
+
+      <main id="main-content">
+        <MobilePortfolio />
+        <section className="hero" id="top" aria-labelledby="hero-title">
+          <div className="hero-copy">
+            <div className="hero-eyebrow hero-enter" style={{ "--enter-delay": "100ms" } as CSSProperties}>
+              <span>Ahmed Saaied</span>
+              <span className="eyebrow-line" />
+              <span><MapPin aria-hidden="true" /> Cairo, Egypt</span>
+            </div>
+            <h1 id="hero-title" className="hero-enter" style={{ "--enter-delay": "180ms" } as CSSProperties}>
+              <span>I build digital</span>
+              <span>products that</span>
+              <span>feel <em>obvious.</em></span>
+            </h1>
+            <p className="hero-intro hero-enter" style={{ "--enter-delay": "280ms" } as CSSProperties}>
+              Product-minded developer crafting high-performance mobile experiences, practical web systems, and interfaces where every detail earns its place.
+            </p>
+            <div className="hero-actions hero-enter" style={{ "--enter-delay": "360ms" } as CSSProperties}>
+              <a className="primary-action" href="#work" data-magnetic data-cursor="Explore">
+                Explore selected work <ArrowDownRight aria-hidden="true" />
+              </a>
+              <a className="text-action" href="mailto:ahmedsaaied117@gmail.com" data-magnetic data-cursor="Connect">
+                Start a conversation <ArrowRight aria-hidden="true" />
+              </a>
+            </div>
+          </div>
+
+          <div className="hero-stage-scroll">
+            <div className="hero-stage-wrap hero-enter" style={{ "--enter-delay": "240ms" } as CSSProperties}>
+              <HeroStage />
+            </div>
+          </div>
+
+          <div className="hero-marquee" aria-hidden="true">
+            <div>
+              <span>Product thinking</span>
+              <i>✳</i>
+              <span>Interface craft</span>
+              <i>✳</i>
+              <span>Engineering depth</span>
+              <i>✳</i>
+              <span>Product thinking</span>
+              <i>✳</i>
+              <span>Interface craft</span>
+              <i>✳</i>
+              <span>Engineering depth</span>
+              <i>✳</i>
+            </div>
+          </div>
+        </section>
+
+        <section className="work-section section-shell" id="work" aria-labelledby="work-title">
+          <ProjectAura projects={projects} />
+          <Reveal className="section-heading">
+            <div>
+              <span className="section-kicker">01 / Selected work</span>
+              <h2 id="work-title">Products shaped from the inside out.</h2>
+            </div>
+            <p>
+              Five different problems. One standard: understand the system, simplify the experience, and make the result feel considered at every scale.
+            </p>
+          </Reveal>
+
+          <Reveal className="work-manifesto">
+            <span>Five products</span>
+            <p>Different industries, roles, and constraints—connected by one way of thinking.</p>
+            <div aria-label="Portfolio range">
+              <strong>Mobile</strong><i />
+              <strong>Web</strong><i />
+              <strong>Systems</strong>
+            </div>
+          </Reveal>
+
+          <div className="project-list">
+            {projects.map((project, index) => (
+              <ProjectShowcase
+                key={project.id}
+                project={project}
+                reversed={index % 2 === 1}
+                index={index}
+                total={projects.length}
+              />
+            ))}
+          </div>
+        </section>
+
+        <section className="approach-section decision-lab" id="approach" aria-labelledby="approach-title">
+          <div className="decision-lab-grid" aria-hidden="true" />
+          <div className="section-shell">
+            <Reveal className="decision-lab-heading">
+              <span className="section-kicker">02 / Product decision lab</span>
+              <h2 id="approach-title">Complexity enters.<br /><em>Clarity leaves.</em></h2>
+              <p>
+                I keep strategy, interface, and implementation in one continuous loop—so the product does not lose its meaning between a sketch and production.
+              </p>
+            </Reveal>
+
+            <div className="decision-lab-stage">
+              <div className="lab-input" aria-hidden="true">
+                <span>Raw complexity</span>
+                <i /><i /><i /><i /><i />
+              </div>
+
+              <div className="lab-process">
+                {process.map((item, index) => (
+                  <Reveal key={item.number} delay={index * 70}>
+                    <article className="lab-step">
+                      <span>{item.number}</span>
+                      <div>
+                        <h3>{item.title}</h3>
+                        <p>{item.text}</p>
+                      </div>
+                      <ArrowRight aria-hidden="true" />
+                    </article>
+                  </Reveal>
+                ))}
+              </div>
+
+              <Reveal className="lab-output">
+                <span>Resolved product</span>
+                <div className="lab-interface" aria-hidden="true">
+                  <div className="lab-window-dots"><i /><i /><i /></div>
+                  <small>System resolved</small>
+                  <strong>One clear next action</strong>
+                  <p>Complexity translated into a calm, understandable product hierarchy.</p>
+                  <div className="lab-result-map">
+                    <span>Context</span><ArrowRight /><span>Decision</span><ArrowRight /><span>Feedback</span>
+                  </div>
+                </div>
+                <small>Signal / 100%</small>
+              </Reveal>
+            </div>
+          </div>
+        </section>
+
+        <section className="capabilities-section section-shell" id="capabilities" aria-labelledby="capabilities-title">
+          <Reveal className="section-heading capabilities-heading">
+            <div>
+              <span className="section-kicker">03 / Capabilities</span>
+              <h2 id="capabilities-title">One product brain. Multiple ways to ship.</h2>
+            </div>
+            <p>
+              I work comfortably across the decisions that define a product and the code that makes those decisions real.
+            </p>
+          </Reveal>
+
+          <Reveal className="capability-system">
+            <div className="system-orbit" aria-label="Connected product capabilities">
+              <div className="system-core">
+                <Orbit aria-hidden="true" />
+                <strong>Product<br />thinking</strong>
+                <span>Core system</span>
+              </div>
+              {capabilities.map((capability, index) => {
+                const Icon = index === 0 ? Layers3 : index === 1 ? Workflow : Code2
+                return (
+                  <article className={`system-node system-node-${index + 1}`} key={capability.number}>
+                    <Icon aria-hidden="true" />
+                    <span>{capability.number}</span>
+                    <h3>{capability.title}</h3>
+                    <p>{capability.text}</p>
+                    <small>{capability.tools}</small>
+                  </article>
+                )
+              })}
+              <svg className="system-links" viewBox="0 0 1000 620" preserveAspectRatio="none" aria-hidden="true">
+                <path d="M500 310 C400 210 290 170 170 150" />
+                <path d="M500 310 C625 195 740 170 850 155" />
+                <path d="M500 310 C500 430 500 500 500 555" />
+              </svg>
+            </div>
+
+            <div className="engineering-proof">
+              <div>
+                <span><Gauge aria-hidden="true" /> Engineering principle</span>
+                <h3>Motion with a frame budget, not a visual tax.<br />Systems with real boundaries.</h3>
+              </div>
+            </div>
+          </Reveal>
+
+          <Reveal className="tool-ribbon">
+            {[
+              "Flutter",
+              "Dart",
+              "Riverpod",
+              "Firebase",
+              "Next.js",
+              "TypeScript",
+              "PostgreSQL",
+              "Tailwind CSS",
+              "Docker",
+              "Figma",
+            ].map((tool) => (
+              <span key={tool}>{tool}</span>
+            ))}
+          </Reveal>
+
+        </section>
+
+        <CinematicEnding />
+      </main>
+
+      <footer className="site-footer">
+        <div className="section-shell">
+          <div>
+            <strong>Ahmed Saaied</strong>
+            <span>Product engineer · Cairo, Egypt</span>
+          </div>
+          <a href="https://www.linkedin.com/in/ahmed-saaied-904a23372" target="_blank" rel="noreferrer" data-cursor="LinkedIn">
+            <Link aria-hidden="true" /> LinkedIn
+          </a>
+          <span>Designed &amp; engineered with intent · 2026</span>
+        </div>
+      </footer>
+    </>
+  )
+}
