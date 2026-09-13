@@ -17,6 +17,7 @@ const projectScenes: Record<string, { label: string; detail: string; image: numb
 
 export function MobilePortfolio() {
   const introRef = useRef<HTMLElement>(null)
+  const activeIdRef = useRef(projects[0].id)
   const [activeId, setActiveId] = useState(projects[0].id)
 
   useEffect(() => {
@@ -27,9 +28,14 @@ export function MobilePortfolio() {
     }
 
     let frame = 0
+    let lastProgress = -1
+    const introDistance = Math.max(intro.offsetHeight * 0.7, 1)
     const render = () => {
-      const progress = Math.min(Math.max(window.scrollY / Math.max(intro.offsetHeight * 0.7, 1), 0), 1)
-      intro.style.setProperty("--mobile-intro-progress", String(progress))
+      const progress = Math.min(Math.max(window.scrollY / introDistance, 0), 1)
+      if (Math.abs(progress - lastProgress) > 0.003) {
+        intro.style.setProperty("--mobile-intro-progress", progress.toFixed(3))
+        lastProgress = progress
+      }
       frame = 0
     }
     const onScroll = () => {
@@ -53,7 +59,10 @@ export function MobilePortfolio() {
           .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0]
         if (!visible) return
         const id = (visible.target as HTMLElement).dataset.mobileProject
-        if (id) setActiveId(id)
+        if (id && id !== activeIdRef.current) {
+          activeIdRef.current = id
+          setActiveId(id)
+        }
       },
       { rootMargin: "-24% 0px -30%", threshold: [0.2, 0.45, 0.7] },
     )

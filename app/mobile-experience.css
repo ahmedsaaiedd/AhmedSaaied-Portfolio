@@ -697,3 +697,42 @@ html[data-motion="reduced"] .mobile-intro h1 span {
   animation: none;
   transform: none;
 }
+
+@media (max-width: 54rem) {
+  .mobile-dock,
+  .mobile-dock a {
+    -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
+    user-select: none;
+  }
+
+  .mobile-dock a {
+    position: relative;
+    outline: none;
+    transition: background-color 220ms cubic-bezier(.16, 1, .3, 1), color 180ms ease, transform 220ms cubic-bezier(.16, 1, .3, 1);
+  }
+
+  .mobile-dock a:active {
+    background: transparent;
+    transform: scale(0.985);
+  }
+
+  .mobile-dock a[data-active="true"]:active {
+    background: rgba(216, 255, 69, 0.1);
+  }
+
+  .mobile-dock a:focus-visible {
+    box-shadow: inset 0 0 0 1px rgba(216, 255, 69, 0.52);
+  }
+
+  #mobile-work,
+  #approach,
+  #capabilities,
+  #contact,
+  .world-theater-anchor,
+  .project-world-page #system,
+  .project-world-page #next-world {
+    scroll-margin-top: 1.25rem;
+    scroll-margin-bottom: calc(6.25rem + env(safe-area-inset-bottom));
+  }
+}

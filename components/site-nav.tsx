@@ -1,6 +1,6 @@
 "use client"
 
-import { useEffect, useRef, useState } from "react"
+import { type MouseEvent, useEffect, useRef, useState } from "react"
 import { ArrowLeft, Command, Grid2X2, Layers3, Menu, MessageCircle, Sparkles, X } from "lucide-react"
 import Link from "next/link"
 
@@ -29,6 +29,7 @@ export function SiteNav({ mode = "home", worldCount }: SiteNavProps) {
   const [scrolled, setScrolled] = useState(false)
   const [active, setActive] = useState(mode === "world" ? "#top" : "#work")
   const scrolledRef = useRef(false)
+  const activeRef = useRef(mode === "world" ? "#top" : "#work")
 
   useEffect(() => {
     const onScroll = () => {
@@ -43,14 +44,24 @@ export function SiteNav({ mode = "home", worldCount }: SiteNavProps) {
     let frame = 0
     const updateActive = () => {
       frame = 0
-      let current = links[0].href
       const mobile = window.matchMedia("(max-width: 54rem)").matches
+      const viewportHeight = window.innerHeight || document.documentElement.clientHeight
+      let current = links[0].href
+
       for (const link of links) {
         const href = mobile && link.href === "#work" ? "#mobile-work" : link.href
         const section = document.querySelector(href)
-        if (section && section.getBoundingClientRect().top <= window.innerHeight * 0.4) current = link.href
+        if (!section) continue
+
+        const rect = section.getBoundingClientRect()
+        const threshold = link.href === "#next-world" ? viewportHeight * 0.78 : viewportHeight * 0.52
+        if (rect.top <= threshold && rect.bottom > viewportHeight * 0.08) current = link.href
       }
-      setActive(current)
+
+      if (current !== activeRef.current) {
+        activeRef.current = current
+        setActive(current)
+      }
     }
     const trackSection = () => { if (!frame) frame = requestAnimationFrame(updateActive) }
     window.addEventListener("scroll", trackSection, { passive: true })
@@ -69,6 +80,31 @@ export function SiteNav({ mode = "home", worldCount }: SiteNavProps) {
     setOpen(false)
     window.dispatchEvent(new Event("portfolio:command"))
   }
+  const handleDockClick = (event: MouseEvent<HTMLAnchorElement>, linkHref: string) => {
+    const mobile = window.matchMedia("(max-width: 54rem)").matches
+    if (!mobile) return
+
+    const targetHref = linkHref === "#work" ? "#mobile-work" : linkHref
+    const target = document.querySelector<HTMLElement>(targetHref)
+    if (!target) return
+
+    event.preventDefault()
+    setOpen(false)
+    activeRef.current = linkHref
+    setActive(linkHref)
+
+    const rect = target.getBoundingClientRect()
+    const viewportHeight = window.innerHeight || document.documentElement.clientHeight
+    const dockClearance = 104
+    const topInset = 18
+    const targetTop = window.scrollY + rect.top
+    const centeredOffset = Math.max(topInset, Math.round((viewportHeight - Math.min(rect.height, viewportHeight - dockClearance)) / 2))
+    const nextY = Math.max(0, Math.round(targetTop - centeredOffset))
+
+    window.scrollTo({ top: nextY, behavior: "smooth" })
+    history.replaceState(null, "", targetHref)
+  }
+
 
   return (
     <header className="site-header" data-scrolled={scrolled} data-mode={mode}>
@@ -138,7 +174,7 @@ export function SiteNav({ mode = "home", worldCount }: SiteNavProps) {
             const Icon = [Grid2X2, Sparkles, Layers3, MessageCircle][index]
             return <a key={link.href} href={link.href === "#work" ? "#mobile-work" : link.href}
               data-active={active === link.href} aria-current={active === link.href ? "location" : undefined}
-              onClick={() => setActive(link.href)}>
+              onClick={(event) => handleDockClick(event, link.href)}>
               <Icon aria-hidden="true" /><span>{link.label === "Capabilities" ? "Skills" : link.label}</span>
             </a>
           })}

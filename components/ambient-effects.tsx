@@ -382,7 +382,9 @@ export function AmbientEffects() {
     }
     window.addEventListener("scroll", requestScrollFrame, { passive: true })
     window.addEventListener("resize", onResize, { passive: true })
-    window.addEventListener("wheel", onProjectWheel, { passive: false })
+    if (projectRailQuery.matches) {
+      window.addEventListener("wheel", onProjectWheel, { passive: false })
+    }
 
     return () => {
       cancelAnimationFrame(scrollFrame)
@@ -399,7 +401,9 @@ export function AmbientEffects() {
       window.removeEventListener("scroll", requestScrollFrame)
       window.removeEventListener("resize", onResize)
       visibilityObserver.disconnect()
-      window.removeEventListener("wheel", onProjectWheel)
+      if (projectRailQuery.matches) {
+        window.removeEventListener("wheel", onProjectWheel)
+      }
     }
   }, [])
 
