@@ -46,7 +46,7 @@ export function SiteNav({ mode = "home", worldCount }: SiteNavProps) {
     dockHideTimer.current = window.setTimeout(() => {
       const dockHasFocus = document.activeElement?.closest?.(".mobile-dock")
       if (!dockHasFocus) setDockVisible(false)
-    }, 3000)
+    }, 1500)
   }, [])
 
   useEffect(() => {
@@ -64,7 +64,7 @@ export function SiteNav({ mode = "home", worldCount }: SiteNavProps) {
     document.addEventListener("visibilitychange", onVisibilityChange)
     mobileQuery.addEventListener("change", onActivity)
     if (mobileQuery.matches) {
-      dockHideTimer.current = window.setTimeout(() => setDockVisible(false), 3000)
+      dockHideTimer.current = window.setTimeout(() => setDockVisible(false), 1500)
     }
 
     return () => {
