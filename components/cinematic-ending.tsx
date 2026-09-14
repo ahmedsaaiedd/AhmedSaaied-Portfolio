@@ -1,6 +1,7 @@
-import { ArrowUpRight, Link as LinkIcon, Mail } from "lucide-react"
+import { ArrowUpRight, FileText, Link as LinkIcon, Mail } from "lucide-react"
 
 import { Reveal } from "@/components/reveal"
+import { TransitionLink } from "@/components/transition-link"
 
 export function CinematicEnding() {
   return (
@@ -31,6 +32,9 @@ export function CinematicEnding() {
             <a href="https://www.linkedin.com/in/ahmed-saaied-904a23372" target="_blank" rel="noreferrer" data-cursor="LinkedIn">
               <LinkIcon aria-hidden="true" /> LinkedIn
             </a>
+            <TransitionLink href="/resume" data-cursor="Resume">
+              <FileText aria-hidden="true" /> Resume <ArrowUpRight aria-hidden="true" />
+            </TransitionLink>
           </div>
         </Reveal>
         <div className="ending-mark" aria-hidden="true"><span>AS</span><i>.</i></div>

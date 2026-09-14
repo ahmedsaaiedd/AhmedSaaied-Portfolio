@@ -3,6 +3,7 @@
 import { type MouseEvent, useEffect, useRef, useState } from "react"
 import { ArrowLeft, Command, Grid2X2, Layers3, Menu, MessageCircle, Sparkles, X } from "lucide-react"
 import Link from "next/link"
+import { TransitionLink } from "@/components/transition-link"
 
 const homeLinks = [
   { href: "#work", label: "Work" },
@@ -119,6 +120,9 @@ export function SiteNav({ mode = "home", worldCount }: SiteNavProps) {
           </a>
         ))}
         {mode === "home" && (
+          <TransitionLink className="resume-nav-link" href="/resume" data-cursor="Resume">Resume</TransitionLink>
+        )}
+        {mode === "home" && (
           <button type="button" className="command-launch" onClick={openCommands} aria-label="Open command center">
             <Command aria-hidden="true" />
             <span>Ctrl K</span>
@@ -161,6 +165,12 @@ export function SiteNav({ mode = "home", worldCount }: SiteNavProps) {
             {link.label}
           </a>
         ))}
+        {mode === "home" && (
+          <TransitionLink href="/resume" onClick={() => setOpen(false)}>
+            <span>05</span>
+            Resume
+          </TransitionLink>
+        )}
         {mode === "home" && (
           <button type="button" onClick={openCommands}>
             <span>⌘K</span>

@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import "./mobile-experience.css";
 import { AdaptiveMotion } from "@/components/adaptive-motion";
+import { RouteTransition } from "@/components/route-transition";
 
 export const metadata: Metadata = {
   title: "Ahmed Saaied — Product Engineer",
@@ -22,6 +23,7 @@ export default function RootLayout({
     <html lang="en" className="scroll-smooth">
       <body className="antialiased">
         <AdaptiveMotion />
+        <RouteTransition />
         {children}
       </body>
     </html>
