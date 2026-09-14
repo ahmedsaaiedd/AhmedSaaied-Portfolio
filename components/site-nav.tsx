@@ -1,6 +1,6 @@
 "use client"
 
-import { type MouseEvent, useEffect, useRef, useState } from "react"
+import { type MouseEvent, useCallback, useEffect, useRef, useState } from "react"
 import { ArrowLeft, Command, Grid2X2, Layers3, Menu, MessageCircle, Sparkles, X } from "lucide-react"
 import Link from "next/link"
 import { TransitionLink } from "@/components/transition-link"
@@ -29,8 +29,55 @@ export function SiteNav({ mode = "home", worldCount }: SiteNavProps) {
   const [open, setOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
   const [active, setActive] = useState(mode === "world" ? "#top" : "#work")
+  const [dockVisible, setDockVisible] = useState(true)
   const scrolledRef = useRef(false)
   const activeRef = useRef(mode === "world" ? "#top" : "#work")
+  const dockHideTimer = useRef<number | null>(null)
+
+  const wakeDock = useCallback(() => {
+    const mobile = window.matchMedia("(max-width: 54rem)").matches
+    if (!mobile) {
+      setDockVisible(true)
+      return
+    }
+
+    setDockVisible(true)
+    if (dockHideTimer.current !== null) window.clearTimeout(dockHideTimer.current)
+    dockHideTimer.current = window.setTimeout(() => {
+      const dockHasFocus = document.activeElement?.closest?.(".mobile-dock")
+      if (!dockHasFocus) setDockVisible(false)
+    }, 3000)
+  }, [])
+
+  useEffect(() => {
+    const mobileQuery = window.matchMedia("(max-width: 54rem)")
+    const onActivity = () => wakeDock()
+    const onVisibilityChange = () => {
+      if (!document.hidden) wakeDock()
+    }
+
+    window.addEventListener("scroll", onActivity, { passive: true })
+    window.addEventListener("touchstart", onActivity, { passive: true })
+    window.addEventListener("pointerdown", onActivity, { passive: true })
+    window.addEventListener("keydown", onActivity)
+    window.addEventListener("focusin", onActivity)
+    document.addEventListener("visibilitychange", onVisibilityChange)
+    mobileQuery.addEventListener("change", onActivity)
+    if (mobileQuery.matches) {
+      dockHideTimer.current = window.setTimeout(() => setDockVisible(false), 3000)
+    }
+
+    return () => {
+      window.removeEventListener("scroll", onActivity)
+      window.removeEventListener("touchstart", onActivity)
+      window.removeEventListener("pointerdown", onActivity)
+      window.removeEventListener("keydown", onActivity)
+      window.removeEventListener("focusin", onActivity)
+      document.removeEventListener("visibilitychange", onVisibilityChange)
+      mobileQuery.removeEventListener("change", onActivity)
+      if (dockHideTimer.current !== null) window.clearTimeout(dockHideTimer.current)
+    }
+  }, [wakeDock])
 
   useEffect(() => {
     const onScroll = () => {
@@ -84,6 +131,7 @@ export function SiteNav({ mode = "home", worldCount }: SiteNavProps) {
   const handleDockClick = (event: MouseEvent<HTMLAnchorElement>, linkHref: string) => {
     const mobile = window.matchMedia("(max-width: 54rem)").matches
     if (!mobile) return
+    wakeDock()
 
     const targetHref = linkHref === "#work" ? "#mobile-work" : linkHref
     const target = document.querySelector<HTMLElement>(targetHref)
@@ -179,7 +227,7 @@ export function SiteNav({ mode = "home", worldCount }: SiteNavProps) {
         )}
       </nav>
 
-      <nav className="mobile-dock" aria-label="Mobile primary navigation">
+      <nav className="mobile-dock" data-visible={dockVisible} aria-label="Mobile primary navigation">
           {links.map((link, index) => {
             const Icon = [Grid2X2, Sparkles, Layers3, MessageCircle][index]
             return <a key={link.href} href={link.href === "#work" ? "#mobile-work" : link.href}
@@ -188,7 +236,18 @@ export function SiteNav({ mode = "home", worldCount }: SiteNavProps) {
               <Icon aria-hidden="true" /><span>{link.label === "Capabilities" ? "Skills" : link.label}</span>
             </a>
           })}
-        </nav>
+      </nav>
+      <button
+        className="mobile-dock-handle"
+        type="button"
+        data-visible={!dockVisible}
+        aria-label="Show navigation"
+        aria-hidden={dockVisible}
+        tabIndex={dockVisible ? -1 : 0}
+        onClick={wakeDock}
+      >
+        <span />
+      </button>
     </header>
   )
 }

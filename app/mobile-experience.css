@@ -1,6 +1,7 @@
 /* The mobile site is a separate product experience, not a compressed desktop. */
 .mobile-portfolio,
-.mobile-dock {
+.mobile-dock,
+.mobile-dock-handle {
   display: none;
 }
 
@@ -51,6 +52,66 @@
     border-radius: 1.2rem;
     background: rgba(8, 10, 8, 0.94);
     box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.5);
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+    visibility: visible;
+    will-change: transform, opacity;
+    transition:
+      transform 420ms cubic-bezier(.16, 1, .3, 1),
+      opacity 220ms ease,
+      visibility 0s linear;
+  }
+
+  .mobile-dock[data-visible="false"] {
+    opacity: 0;
+    transform: translate3d(0, calc(100% + 1.5rem), 0);
+    visibility: hidden;
+    pointer-events: none;
+    transition:
+      transform 420ms cubic-bezier(.7, 0, .84, 0),
+      opacity 180ms ease,
+      visibility 0s linear 420ms;
+  }
+
+  .mobile-dock-handle {
+    position: fixed;
+    z-index: 179;
+    left: 50%;
+    bottom: max(.25rem, env(safe-area-inset-bottom));
+    display: grid;
+    width: 3.2rem;
+    height: 1.35rem;
+    padding: 0;
+    transform: translate3d(-50%, 1.25rem, 0);
+    place-items: center;
+    border: 1px solid rgba(255, 255, 255, .13);
+    border-radius: 999px;
+    background: rgba(8, 10, 8, .82);
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    -webkit-backdrop-filter: blur(12px);
+    backdrop-filter: blur(12px);
+    transition:
+      transform 360ms cubic-bezier(.16, 1, .3, 1),
+      opacity 180ms ease,
+      visibility 0s linear 360ms;
+  }
+
+  .mobile-dock-handle[data-visible="true"] {
+    opacity: 1;
+    transform: translate3d(-50%, 0, 0);
+    visibility: visible;
+    pointer-events: auto;
+    transition-delay: 120ms, 120ms, 0s;
+  }
+
+  .mobile-dock-handle span {
+    width: 1.45rem;
+    height: 2px;
+    border-radius: 999px;
+    background: rgba(216, 255, 69, .72);
+    box-shadow: 0 0 .7rem rgba(216, 255, 69, .25);
   }
 
   .mobile-dock a {
@@ -700,7 +761,8 @@ html[data-motion="reduced"] .mobile-intro h1 span {
 
 @media (max-width: 54rem) {
   .mobile-dock,
-  .mobile-dock a {
+  .mobile-dock a,
+  .mobile-dock-handle {
     -webkit-tap-highlight-color: transparent;
     touch-action: manipulation;
     user-select: none;
@@ -725,6 +787,11 @@ html[data-motion="reduced"] .mobile-intro h1 span {
     box-shadow: inset 0 0 0 1px rgba(216, 255, 69, 0.52);
   }
 
+  .mobile-dock-handle:focus-visible {
+    outline: 1px solid rgba(216, 255, 69, .72);
+    outline-offset: 2px;
+  }
+
   #mobile-work,
   #approach,
   #capabilities,
@@ -734,5 +801,12 @@ html[data-motion="reduced"] .mobile-intro h1 span {
   .project-world-page #next-world {
     scroll-margin-top: 1.25rem;
     scroll-margin-bottom: calc(6.25rem + env(safe-area-inset-bottom));
+  }
+}
+
+@media (max-width: 54rem) and (prefers-reduced-motion: reduce) {
+  .mobile-dock,
+  .mobile-dock-handle {
+    transition-duration: 1ms !important;
   }
 }
