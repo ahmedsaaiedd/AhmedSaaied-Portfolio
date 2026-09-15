@@ -54,6 +54,7 @@ function ProjectVisual({ project }: { project: Project }) {
     spoton: 0,
     qnb: 2,
     swizzle: 0,
+    automate: 1,
   }
 
   const portalSignals: Record<string, string[]> = {
@@ -62,6 +63,7 @@ function ProjectVisual({ project }: { project: Project }) {
     spoton: ["Locate", "Reserve", "Arrive"],
     qnb: ["Balance", "Act", "Understand"],
     swizzle: ["Taste", "Identity", "Launch"],
+    automate: ["Observe", "Care", "Remember"],
   }
 
   const screen = project.images[primaryImageIndex[project.id] ?? 0] ?? project.cover

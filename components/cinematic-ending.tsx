@@ -13,6 +13,7 @@ export function CinematicEnding() {
         <span data-world="03">P</span>
         <span data-world="04">be</span>
         <span data-world="05">S</span>
+        <span data-world="06">A</span>
         <i />
       </div>
       <div className="section-shell ending-inner">

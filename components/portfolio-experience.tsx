@@ -1,7 +1,8 @@
-import { ArrowDownRight, ArrowRight, Code2, Gauge, Layers3, Link, MapPin, Orbit, Workflow } from "lucide-react"
+import { ArrowDownRight, ArrowRight, Link, MapPin } from "lucide-react"
 import type { CSSProperties } from "react"
 
 import { AmbientEffects } from "@/components/ambient-effects"
+import { CapabilityAtlas } from "@/components/capability-atlas"
 import { CinematicIntro } from "@/components/cinematic-intro"
 import { CommandPalette } from "@/components/command-palette"
 import { CinematicEnding } from "@/components/cinematic-ending"
@@ -11,7 +12,7 @@ import { ProjectAura } from "@/components/project-aura"
 import { ProjectShowcase } from "@/components/project-showcase"
 import { Reveal } from "@/components/reveal"
 import { SiteNav } from "@/components/site-nav"
-import { capabilities, projects } from "@/lib/portfolio"
+import { projects } from "@/lib/portfolio"
 
 const process = [
   {
@@ -106,12 +107,12 @@ export function PortfolioExperience() {
               <h2 id="work-title">Products shaped from the inside out.</h2>
             </div>
             <p>
-              Five different problems. One standard: understand the system, simplify the experience, and make the result feel considered at every scale.
+              Six different problems. One standard: understand the system, simplify the experience, and make the result feel considered at every scale.
             </p>
           </Reveal>
 
           <Reveal className="work-manifesto">
-            <span>Five products</span>
+            <span>Six products</span>
             <p>Different industries, roles, and constraints—connected by one way of thinking.</p>
             <div aria-label="Portfolio range">
               <strong>Mobile</strong><i />
@@ -193,55 +194,8 @@ export function PortfolioExperience() {
             </p>
           </Reveal>
 
-          <Reveal className="capability-system">
-            <div className="system-orbit" aria-label="Connected product capabilities">
-              <div className="system-core">
-                <Orbit aria-hidden="true" />
-                <strong>Product<br />thinking</strong>
-                <span>Core system</span>
-              </div>
-              {capabilities.map((capability, index) => {
-                const Icon = index === 0 ? Layers3 : index === 1 ? Workflow : Code2
-                return (
-                  <article className={`system-node system-node-${index + 1}`} key={capability.number}>
-                    <Icon aria-hidden="true" />
-                    <span>{capability.number}</span>
-                    <h3>{capability.title}</h3>
-                    <p>{capability.text}</p>
-                    <small>{capability.tools}</small>
-                  </article>
-                )
-              })}
-              <svg className="system-links" viewBox="0 0 1000 620" preserveAspectRatio="none" aria-hidden="true">
-                <path d="M500 310 C400 210 290 170 170 150" />
-                <path d="M500 310 C625 195 740 170 850 155" />
-                <path d="M500 310 C500 430 500 500 500 555" />
-              </svg>
-            </div>
-
-            <div className="engineering-proof">
-              <div>
-                <span><Gauge aria-hidden="true" /> Engineering principle</span>
-                <h3>Motion with a frame budget, not a visual tax.<br />Systems with real boundaries.</h3>
-              </div>
-            </div>
-          </Reveal>
-
-          <Reveal className="tool-ribbon">
-            {[
-              "Flutter",
-              "Dart",
-              "Riverpod",
-              "Firebase",
-              "Next.js",
-              "TypeScript",
-              "PostgreSQL",
-              "Tailwind CSS",
-              "Docker",
-              "Figma",
-            ].map((tool) => (
-              <span key={tool}>{tool}</span>
-            ))}
+          <Reveal>
+            <CapabilityAtlas />
           </Reveal>
 
         </section>

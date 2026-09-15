@@ -92,6 +92,19 @@ const worldLanguage: Record<string, {
     processTitle: "Blend, taste, refine, launch.",
     resultLabel: "05 / Ready to serve",
   },
+  automate: {
+    proofEyebrow: "Machine telemetry",
+    proofTitle: "The living system behind every drive.",
+    challengeLabel: "01 / Scattered signals",
+    challengeTitle: "Turn ownership noise into one calm machine.",
+    roleLabel: "02 / Control deck",
+    roleTitle: "Design and engineer the entire ownership rhythm.",
+    decisionsLabel: "03 / Machine logic",
+    decisionsTitle: "Choices that make the car feel understood.",
+    processLabel: "04 / Care cycle",
+    processTitle: "Observe, remember, care, repeat.",
+    resultLabel: "05 / In rhythm",
+  },
 }
 
 export function ProjectWorld({ project, nextProject, total }: ProjectWorldProps) {

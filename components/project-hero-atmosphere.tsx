@@ -101,10 +101,33 @@ function SwizzleAtmosphere() {
   )
 }
 
+function AutoMateAtmosphere() {
+  return (
+    <div className="hero-atmosphere automate-atmosphere" aria-hidden="true">
+      <div className="world-machine-orbit">
+        <i /><i /><i /><i /><i />
+        <div className="machine-memory-core">
+          <span>LOCAL MEMORY</span>
+          <strong>5,000</strong>
+          <small>KM OBSERVED</small>
+        </div>
+        <div className="machine-cycle cycle-care"><span>CARE</span><b>07</b></div>
+        <div className="machine-cycle cycle-cost"><span>COST</span><b>CALM</b></div>
+        <div className="machine-cycle cycle-drive"><span>DRIVE</span><b>SYNCED</b></div>
+        <strong>IN RHYTHM</strong>
+      </div>
+      <span className="machine-status status-care">CARE / 07</span>
+      <span className="machine-status status-memory">LOCAL MEMORY</span>
+      <span className="machine-status status-journey">5,000 KM</span>
+    </div>
+  )
+}
+
 export function ProjectHeroAtmosphere({ project }: AtmosphereProps) {
   if (project.id === "squadtactics") return <SquadAtmosphere />
   if (project.id === "helpdesk") return <HelpdeskAtmosphere />
   if (project.id === "spoton") return <SpotonAtmosphere />
   if (project.id === "qnb") return <QnbAtmosphere />
-  return <SwizzleAtmosphere />
+  if (project.id === "swizzle") return <SwizzleAtmosphere />
+  return <AutoMateAtmosphere />
 }

@@ -9,7 +9,13 @@ export function RouteTransition() {
 
   useEffect(() => {
     if (pathname === previousPath.current) return
+    const from = previousPath.current
     previousPath.current = pathname
+
+    if (from !== "/resume" && pathname !== "/resume") {
+      delete document.documentElement.dataset.routeTransition
+      return
+    }
 
     const root = document.documentElement
     root.dataset.routeTransition = "arriving"

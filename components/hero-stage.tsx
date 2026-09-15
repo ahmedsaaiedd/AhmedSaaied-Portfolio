@@ -6,11 +6,12 @@ import Image from "next/image"
 import { projects, type Project } from "@/lib/portfolio"
 
 const heroCopy: Record<string, { primary: number; mark: string; node: string; cursor: string; system: string }> = {
-  squadtactics: { primary: 2, mark: "XI", node: "Tactics", cursor: "Set formation", system: "11 players · 6 formations · live match logic" },
-  helpdesk: { primary: 1, mark: "HD", node: "Support", cursor: "Route ticket", system: "3 roles · routed requests · real-time status" },
-  spoton: { primary: 0, mark: "P", node: "Parking", cursor: "Find space", system: "live availability · guided route · reserved arrival" },
-  qnb: { primary: 2, mark: "be", node: "Banking", cursor: "Read balance", system: "clear balance · fast actions · spending context" },
-  swizzle: { primary: 0, mark: "S", node: "Flavor", cursor: "Mix flavor", system: "8 key slides · 2 core colors · launch system" },
+  squadtactics: { primary: 2, mark: "XI", node: "ST Pro", cursor: "Set formation", system: "11 players · 6 formations · live match logic" },
+  helpdesk: { primary: 1, mark: "HD", node: "HelpDesk", cursor: "Route ticket", system: "3 roles · routed requests · real-time status" },
+  spoton: { primary: 0, mark: "P", node: "SpotON", cursor: "Find space", system: "live availability · guided route · reserved arrival" },
+  qnb: { primary: 2, mark: "be", node: "QNB", cursor: "Read balance", system: "clear balance · fast actions · spending context" },
+  swizzle: { primary: 0, mark: "S", node: "Swizzle", cursor: "Mix flavor", system: "8 key slides · 2 core colors · launch system" },
+  automate: { primary: 1, mark: "A", node: "AutoMate", cursor: "Wake machine", system: "5 rooms · 7 care systems · local-first memory" },
 }
 
 const constellation = [
@@ -19,6 +20,7 @@ const constellation = [
   { x: "91%", y: "53%" },
   { x: "78%", y: "83%" },
   { x: "16%", y: "81%" },
+  { x: "8%", y: "51%" },
 ]
 
 const formation = [
@@ -90,7 +92,7 @@ function ProductAtmosphere({ project }: { project: Project }) {
     )
   }
 
-  return (
+  if (project.id === "swizzle") return (
     <div className="hero-world-art hero-world-swizzle" aria-hidden="true">
       <strong className="swizzle-word">SWIZZLE</strong>
       <div className="flavor-wheel">
@@ -100,6 +102,18 @@ function ProductAtmosphere({ project }: { project: Project }) {
         <i style={{ "--flavor": "#9b6cff" } as CSSProperties}>Grape</i>
       </div>
       <span className="hero-world-caption">Pick a flavor · build the mix</span>
+    </div>
+  )
+
+  return (
+    <div className="hero-world-art hero-world-automate" aria-hidden="true">
+      <div className="machine-pulse">
+        <i /><i /><i /><i />
+        <span className="machine-glyph"><b /><b /><b /></span>
+        <strong>IN RHYTHM</strong>
+      </div>
+      <div className="machine-readout"><span>ODOMETER</span><strong>5,000 km</strong><i>LOCAL / PRIVATE</i></div>
+      <span className="hero-world-caption">Care · journey · memory</span>
     </div>
   )
 }

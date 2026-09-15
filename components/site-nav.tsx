@@ -19,6 +19,8 @@ const worldLinks = [
   { href: "#next-world", label: "Next" },
 ]
 
+const MOBILE_DOCK_IDLE_MS = 1500
+
 type SiteNavProps = {
   mode?: "home" | "world"
   worldCount?: string
@@ -46,7 +48,7 @@ export function SiteNav({ mode = "home", worldCount }: SiteNavProps) {
     dockHideTimer.current = window.setTimeout(() => {
       const dockHasFocus = document.activeElement?.closest?.(".mobile-dock")
       if (!dockHasFocus) setDockVisible(false)
-    }, 1500)
+    }, MOBILE_DOCK_IDLE_MS)
   }, [])
 
   useEffect(() => {
@@ -64,7 +66,7 @@ export function SiteNav({ mode = "home", worldCount }: SiteNavProps) {
     document.addEventListener("visibilitychange", onVisibilityChange)
     mobileQuery.addEventListener("change", onActivity)
     if (mobileQuery.matches) {
-      dockHideTimer.current = window.setTimeout(() => setDockVisible(false), 1500)
+      dockHideTimer.current = window.setTimeout(() => setDockVisible(false), MOBILE_DOCK_IDLE_MS)
     }
 
     return () => {

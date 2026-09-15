@@ -393,14 +393,84 @@ export const projects: Project[] = [
       },
     ],
   },
+  {
+    id: "automate",
+    number: "06",
+    title: "AutoMate",
+    discipline: "Android engineering · Product design",
+    year: "2026",
+    headline: "Your car, understood as a living machine.",
+    summary:
+      "A private, local-first vehicle companion that turns maintenance, mileage, fuel, documents, and costs into one calm living map of the machine.",
+    role: "Kotlin developer",
+    accent: "#a584ff",
+    accentSoft: "rgba(165,132,255,.16)",
+    surface: "#120e18",
+    cover: "/projects/automate/Screenshot_20260916_015445_AutoMate.jpg",
+    images: [
+      "/projects/automate/Screenshot_20260916_015445_AutoMate.jpg",
+      "/projects/automate/Screenshot_20260916_015434_AutoMate.jpg",
+      "/projects/automate/Screenshot_20260916_015423_AutoMate.jpg",
+      "/projects/automate/Screenshot_20260916_015247_AutoMate.jpg",
+      "/projects/automate/Screenshot_20260916_015254_AutoMate.jpg",
+      "/projects/automate/Screenshot_20260916_015258_AutoMate.jpg",
+      "/projects/automate/Screenshot_20260916_015342_AutoMate.jpg",
+      "/projects/automate/Screenshot_20260916_015306_AutoMate.jpg",
+    ],
+    imageAlt: "AutoMate native Android vehicle care and ownership app",
+    challenge:
+      "Vehicle ownership scatters essential information across odometer notes, invoices, reminders, fuel receipts, and document folders. The product needed to connect all of it without feeling like another dense dashboard or requiring an account.",
+    decisions: [
+      "Built the experience around one living machine whose condition changes with every drive and service event.",
+      "Connected care cycles, fuel entries, costs, documents, and mileage instead of presenting isolated utilities.",
+      "Used progressive disclosure and a five-room navigation model to keep detailed ownership data approachable.",
+      "Made privacy structural: local Room persistence, no account, and explicit device-owned data controls.",
+    ],
+    outcome:
+      "A native Android product with a distinctive living-machine identity, calm daily status, vehicle switching, lifecycle-aware care, cost perspective, a private glovebox, and adaptive appearance and motion controls.",
+    tools: ["Kotlin", "Jetpack Compose", "MVVM", "Room", "Material 3"],
+    signals: [
+      { value: "05", label: "Connected ownership rooms" },
+      { value: "07", label: "Tracked vehicle systems" },
+      { value: "100%", label: "Local-first data" },
+    ],
+    phases: [
+      { title: "Map the machine", text: "Turned care, mileage, fuel, costs, documents, and settings into one connected ownership model." },
+      { title: "Give it a pulse", text: "Created the living-machine orbit and calm status language so health is understood before numbers are read." },
+      { title: "Engineer the memory", text: "Used Kotlin, Compose, MVVM, and Room to keep state structured, responsive, and private on the device." },
+      { title: "Tune the experience", text: "Designed adaptive themes, quiet motion, reminders, and progressive detail for comfortable repeated use." },
+    ],
+    prototypeSteps: [
+      {
+        label: "Wake the machine",
+        hint: "Enter a private ownership experience built around the car rather than a menu of tools.",
+        image: "/projects/automate/Screenshot_20260916_015445_AutoMate.jpg",
+      },
+      {
+        label: "Read its rhythm",
+        hint: "The home orbit compresses mileage, condition, and the next care signal into one glance.",
+        image: "/projects/automate/Screenshot_20260916_015434_AutoMate.jpg",
+      },
+      {
+        label: "Open the care map",
+        hint: "Every system exposes its lifecycle, history, and remaining distance without losing the bigger picture.",
+        image: "/projects/automate/Screenshot_20260916_015423_AutoMate.jpg",
+      },
+      {
+        label: "Keep the glovebox",
+        hint: "Documents and renewals remain organized, visible, and stored on the device.",
+        image: "/projects/automate/Screenshot_20260916_015342_AutoMate.jpg",
+      },
+    ],
+  },
 ]
 
 export const capabilities = [
   {
     number: "01",
     title: "Mobile product engineering",
-    text: "Responsive Flutter experiences, robust state, navigation, offline-aware flows, device details, and motion that stays smooth under real use.",
-    tools: "Flutter · Dart · Riverpod · GoRouter",
+    text: "Responsive Flutter and native Android experiences, robust state, navigation, offline-aware flows, device details, and motion that stays smooth under real use.",
+    tools: "Flutter · Kotlin · Jetpack Compose · Riverpod",
   },
   {
     number: "02",

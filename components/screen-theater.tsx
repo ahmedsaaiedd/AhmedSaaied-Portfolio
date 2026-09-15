@@ -62,7 +62,9 @@ export function ScreenTheater({ project }: { project: Project }) {
         ? "Driver journey"
         : project.id === "qnb"
           ? "Banking flow"
-          : "Brand story"
+          : project.id === "automate"
+            ? "Machine atlas"
+            : "Brand story"
 
   return (
     <section

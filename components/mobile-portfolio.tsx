@@ -13,6 +13,7 @@ const projectScenes: Record<string, { label: string; detail: string; image: numb
   spoton: { label: "Driver journey", detail: "Locate · reserve · arrive", image: 0 },
   qnb: { label: "Financial clarity", detail: "Balance · act · understand", image: 2 },
   swizzle: { label: "Flavor identity", detail: "Taste · color · launch", image: 0 },
+  automate: { label: "Living machine", detail: "Observe · care · remember", image: 1 },
 }
 
 export function MobilePortfolio() {
@@ -99,7 +100,7 @@ export function MobilePortfolio() {
 
         <div className="mobile-intro-readout" aria-label="Portfolio status">
           <span><i /> Available</span>
-          <span>05 products</span>
+          <span>06 products</span>
           <span>Design ↔ Engineering</span>
         </div>
       </section>
@@ -107,7 +108,7 @@ export function MobilePortfolio() {
       <section className="mobile-projects" id="mobile-work" aria-labelledby="mobile-work-title">
         <header className="mobile-projects-heading">
           <span>Selected product systems</span>
-          <h2 id="mobile-work-title">Five worlds.<br />Built from the inside out.</h2>
+          <h2 id="mobile-work-title">Six worlds.<br />Built from the inside out.</h2>
         </header>
 
         <div className="mobile-project-stack">
