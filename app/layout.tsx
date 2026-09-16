@@ -9,8 +9,13 @@ export const metadata: Metadata = {
   description:
     "Portfolio of Ahmed Saaied, a product-minded developer crafting high-performance mobile apps, web systems, and thoughtful digital experiences.",
   icons: {
-    icon: "/favicon.svg",
-    shortcut: "/favicon.svg",
+    icon: [
+      { url: "/favicon-96.png", type: "image/png", sizes: "96x96" },
+      { url: "/favicon-192.png", type: "image/png", sizes: "192x192" },
+      { url: "/favicon.svg", type: "image/svg+xml", sizes: "any" },
+    ],
+    shortcut: "/favicon.ico",
+    apple: [{ url: "/favicon-192.png", type: "image/png", sizes: "192x192" }],
   },
 };
 
