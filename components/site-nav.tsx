@@ -35,6 +35,7 @@ export function SiteNav({ mode = "home", worldCount }: SiteNavProps) {
   const scrolledRef = useRef(false)
   const activeRef = useRef(mode === "world" ? "#top" : "#work")
   const dockHideTimer = useRef<number | null>(null)
+  const lastDockScrollY = useRef(0)
 
   const wakeDock = useCallback(() => {
     const mobile = window.matchMedia("(max-width: 54rem)").matches
@@ -54,11 +55,27 @@ export function SiteNav({ mode = "home", worldCount }: SiteNavProps) {
   useEffect(() => {
     const mobileQuery = window.matchMedia("(max-width: 54rem)")
     const onActivity = () => wakeDock()
+    const onDirectionalScroll = () => {
+      if (!mobileQuery.matches) return
+      const nextY = Math.max(window.scrollY, 0)
+      const delta = nextY - lastDockScrollY.current
+      if (Math.abs(delta) < 4) return
+
+      if (delta > 0 && nextY > 16) {
+        if (dockHideTimer.current !== null) window.clearTimeout(dockHideTimer.current)
+        dockHideTimer.current = null
+        setDockVisible(false)
+      } else {
+        wakeDock()
+      }
+      lastDockScrollY.current = nextY
+    }
     const onVisibilityChange = () => {
       if (!document.hidden) wakeDock()
     }
 
-    window.addEventListener("scroll", onActivity, { passive: true })
+    lastDockScrollY.current = Math.max(window.scrollY, 0)
+    window.addEventListener("scroll", onDirectionalScroll, { passive: true })
     window.addEventListener("touchstart", onActivity, { passive: true })
     window.addEventListener("pointerdown", onActivity, { passive: true })
     window.addEventListener("keydown", onActivity)
@@ -70,7 +87,7 @@ export function SiteNav({ mode = "home", worldCount }: SiteNavProps) {
     }
 
     return () => {
-      window.removeEventListener("scroll", onActivity)
+      window.removeEventListener("scroll", onDirectionalScroll)
       window.removeEventListener("touchstart", onActivity)
       window.removeEventListener("pointerdown", onActivity)
       window.removeEventListener("keydown", onActivity)

@@ -75,10 +75,17 @@ export function MobilePortfolio() {
     <div className="mobile-portfolio" aria-label="Ahmed Saaied mobile portfolio">
       <section ref={introRef} className="mobile-intro" id="mobile-top" aria-labelledby="mobile-hero-title">
         <div className="mobile-intro-grid" aria-hidden="true" />
-        <div className="mobile-intro-status">
-          <span>Ahmed Saaied</span>
-          <i />
-          <span><MapPin aria-hidden="true" /> Cairo</span>
+        <div className="mobile-identity" aria-label="Ahmed Saaied, product designer and developer in Cairo">
+          <span className="mobile-identity-index">Portfolio / 2026</span>
+          <div className="mobile-identity-name" aria-hidden="true">
+            <span>Ahmed</span>
+            <span>Saaied</span>
+          </div>
+          <div className="mobile-identity-location">
+            <span>Product systems</span>
+            <i />
+            <span><MapPin aria-hidden="true" /> Cairo</span>
+          </div>
         </div>
 
         <div className="mobile-intro-copy">

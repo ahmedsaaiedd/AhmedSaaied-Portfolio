@@ -218,8 +218,96 @@
 
   .mobile-intro-status svg { width: 0.75rem; }
 
+  .mobile-identity {
+    position: relative;
+    display: grid;
+    margin-top: clamp(1rem, 3svh, 1.8rem);
+    padding-block: 0.2rem 0.65rem;
+    overflow: hidden;
+    opacity: calc(1 - var(--mobile-intro-progress) * 0.62);
+  }
+
+  .mobile-identity::after {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    height: 1px;
+    transform: scaleX(0);
+    transform-origin: left;
+    background: linear-gradient(90deg, #d8ff45, rgba(216,255,69,.08), transparent);
+    content: "";
+    animation: mobile-identity-scan 900ms cubic-bezier(.16,1,.3,1) 180ms forwards;
+  }
+
+  .mobile-identity-index {
+    position: absolute;
+    z-index: 2;
+    top: 0.55rem;
+    right: 0;
+    color: rgba(216,255,69,.62);
+    font: 0.48rem var(--font-mono);
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+  }
+
+  .mobile-identity-name {
+    display: grid;
+    color: rgba(244,242,235,.025);
+    font-size: clamp(3.65rem, 17.5vw, 5.8rem);
+    font-weight: 900;
+    line-height: 0.68;
+    letter-spacing: -0.085em;
+    text-transform: uppercase;
+    -webkit-text-stroke: 1px rgba(244,242,235,.22);
+  }
+
+  .mobile-identity-name span {
+    display: block;
+    white-space: nowrap;
+    will-change: transform;
+  }
+
+  .mobile-identity-name span:first-child {
+    transform: translate3d(calc(var(--mobile-intro-progress) * -2.2rem), 0, 0);
+  }
+
+  .mobile-identity-name span:last-child {
+    margin-left: 16%;
+    transform: translate3d(calc(var(--mobile-intro-progress) * 2.4rem), 0, 0);
+    color: rgba(216,255,69,.025);
+    -webkit-text-stroke-color: rgba(216,255,69,.34);
+  }
+
+  .mobile-identity-location {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    gap: 0.65rem;
+    margin-top: 0.85rem;
+    color: #858980;
+    font: 0.52rem var(--font-mono);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .mobile-identity-location > i {
+    width: 1.4rem;
+    height: 1px;
+    background: rgba(255,255,255,.17);
+  }
+
+  .mobile-identity-location span:last-child {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+  }
+
+  .mobile-identity-location svg { width: 0.7rem; }
+
   .mobile-intro-copy {
-    margin-top: clamp(2.1rem, 6.5svh, 3.8rem);
+    margin-top: clamp(1rem, 2.4svh, 1.6rem);
     transform: translate3d(0, calc(var(--mobile-intro-progress) * -1.4rem), 0);
     opacity: calc(1 - var(--mobile-intro-progress) * 0.12);
   }
@@ -770,6 +858,10 @@
   to { opacity: 1; transform: translate3d(0, 0, 0); }
 }
 
+@keyframes mobile-identity-scan {
+  to { transform: scaleX(1); }
+}
+
 @keyframes mobile-player-pulse {
   50% { transform: scale(1.45); opacity: .55; }
 }
@@ -794,12 +886,22 @@
 }
 @media (prefers-reduced-motion: reduce) {
   .hero h1 { transform: none !important; }
+  .mobile-identity::after {
+    animation: none;
+    transform: scaleX(1);
+  }
+  .mobile-identity-name span,
   .mobile-intro-copy,
   .mobile-intro::after,
   .mobile-scene-device { transform: none !important; }
   .mobile-intro h1 span { opacity: 1; animation: none; transform: none; }
 }
 html[data-motion="reduced"] .hero h1 { transform: none !important; }
+html[data-motion="reduced"] .mobile-identity::after {
+  animation: none;
+  transform: scaleX(1);
+}
+html[data-motion="reduced"] .mobile-identity-name span,
 html[data-motion="reduced"] .mobile-intro-copy,
 html[data-motion="reduced"] .mobile-intro::after,
 html[data-motion="reduced"] .mobile-scene-device { transform: none !important; }
