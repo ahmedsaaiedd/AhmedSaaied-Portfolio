@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { Analytics } from "@vercel/analytics/next";
 import "./globals.css";
 import "./mobile-experience.css";
 import { AdaptiveMotion } from "@/components/adaptive-motion";
@@ -15,7 +16,13 @@ export const metadata: Metadata = {
       { url: "/favicon.svg", type: "image/svg+xml", sizes: "any" },
     ],
     shortcut: "/favicon.ico",
-    apple: [{ url: "/favicon-192.png", type: "image/png", sizes: "192x192" }],
+    apple: [
+      {
+        url: "/favicon-192.png",
+        type: "image/png",
+        sizes: "192x192",
+      },
+    ],
   },
 };
 
@@ -30,6 +37,7 @@ export default function RootLayout({
         <AdaptiveMotion />
         <RouteTransition />
         {children}
+        <Analytics />
       </body>
     </html>
   );
