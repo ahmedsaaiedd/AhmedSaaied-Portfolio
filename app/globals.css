@@ -360,12 +360,79 @@ html[data-pointer="visible"] .pointer-halo {
   display: flex;
   align-items: center;
   gap: 0.85rem;
-  margin-bottom: 2rem;
+  margin-bottom: 0.8rem;
   color: #aaa8a1;
   font-size: 0.78rem;
   font-weight: 700;
   letter-spacing: 0.11em;
   text-transform: uppercase;
+}
+
+.rotating-role {
+  display: grid;
+  width: min(100%, 34rem);
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 0.7rem 1rem;
+  padding: 0.7rem 0;
+  border-top: 1px solid rgba(216, 255, 69, 0.2);
+  border-bottom: 1px solid rgba(216, 255, 69, 0.12);
+}
+
+.role-signal-label,
+.role-signal-count {
+  color: #777a70;
+  font-family: var(--font-mono);
+  font-size: 0.56rem;
+  font-weight: 650;
+  letter-spacing: 0.11em;
+  text-transform: uppercase;
+}
+
+.role-signal-value {
+  overflow: visible;
+  padding-bottom: 0.08em;
+  color: #d8ff45;
+  font-size: clamp(1.05rem, 1.5vw, 1.45rem);
+  font-weight: 720;
+  letter-spacing: -0.035em;
+  line-height: 1.12;
+  white-space: nowrap;
+  animation: role-signal-enter 520ms cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.role-signal-count { justify-self: end; }
+
+.role-signal-track {
+  position: relative;
+  grid-column: 1 / -1;
+  height: 1px;
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.role-signal-track i {
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 100%;
+  transform-origin: left;
+  background: #d8ff45;
+  animation: role-signal-progress 3200ms linear both;
+}
+
+.hero-role {
+  --enter-delay: 140ms;
+  margin-bottom: 1.4rem;
+}
+
+@keyframes role-signal-enter {
+  from { opacity: 0; transform: translateY(0.7rem); filter: blur(4px); }
+  to { opacity: 1; transform: translateY(0); filter: blur(0); }
+}
+
+@keyframes role-signal-progress {
+  from { transform: scaleX(0); }
+  to { transform: scaleX(1); }
 }
 
 .hero-eyebrow > span:last-child {
@@ -1633,6 +1700,10 @@ html[data-pointer="visible"] .pointer-halo {
     opacity: 1;
     transform: translateY(0);
   }
+}
+
+@keyframes role-caret {
+  50% { opacity: 0; }
 }
 
 @keyframes orbit-spin {
@@ -5751,7 +5822,7 @@ html[data-pointer="visible"] .cursor-dot {
 .ending-status {
   position: absolute;
   left: 50%;
-  bottom: 2rem;
+  bottom: 3.7rem;
   display: flex;
   align-items: center;
   gap: 0.5rem;
@@ -5764,6 +5835,38 @@ html[data-pointer="visible"] .cursor-dot {
 }
 
 .ending-status i { width: 0.4rem; height: 0.4rem; border-radius: 50%; background: #d8ff45; }
+
+.ending-signoff {
+  position: absolute;
+  right: 0;
+  bottom: 1.25rem;
+  left: 0;
+  display: flex;
+  justify-content: space-between;
+  padding-top: 0.9rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  color: #57554f;
+  font-family: var(--font-mono);
+  font-size: 0.56rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .rotating-role i { animation: none; opacity: 0.75; }
+}
+
+@media (max-width: 54rem) {
+  .ending-status { bottom: 4.6rem; }
+
+  .ending-signoff {
+    bottom: 1rem;
+    align-items: center;
+    flex-direction: column;
+    gap: 0.4rem;
+    text-align: center;
+  }
+}
 
 @keyframes ending-question-resolve {
   from { opacity: 0; filter: blur(0.75rem); transform: translate3d(0, 1rem, 0) scaleX(1.035); letter-spacing: -0.03em; }
@@ -10076,12 +10179,274 @@ html[data-aura-project="automate"] .project-aura-world[data-aura-world="automate
   background: linear-gradient(120deg, #542244, #291044 55%, #121d40);
 }
 
+/* Case-study evidence: concrete scope, constraints, system layers, and next validation. */
+.world-case-file {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1px;
+  margin-top: 4rem;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 1.2rem;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.world-case-file > div {
+  min-height: 11rem;
+  padding: 1.5rem;
+  background: color-mix(in srgb, var(--project-surface) 44%, #0c0d0c);
+}
+
+.world-case-file span,
+.world-system-map-head > span {
+  color: color-mix(in srgb, var(--project-accent) 72%, #8a8780);
+  font-family: var(--font-mono);
+  font-size: 0.61rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.world-case-file p {
+  margin: 2.6rem 0 0;
+  color: #c3c0b9;
+  font-size: 0.9rem;
+  line-height: 1.62;
+}
+
+.world-signals article p {
+  max-width: 25rem;
+  margin: 1.5rem 0 0;
+  color: #8e8b84;
+  font-size: 0.74rem;
+  line-height: 1.55;
+}
+
+.world-evidence-note {
+  margin: 0.85rem 0 0;
+  color: #65635e;
+  font-family: var(--font-mono);
+  font-size: 0.57rem;
+  line-height: 1.6;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.world-system-map {
+  display: grid;
+  grid-template-columns: minmax(18rem, 0.72fr) minmax(0, 1.28fr);
+  gap: clamp(3rem, 8vw, 8rem);
+  margin-top: clamp(7rem, 11vw, 11rem);
+}
+
+.world-system-map-head h3 {
+  max-width: 13ch;
+  margin: 1rem 0 1.4rem;
+  color: #f4f1eb;
+  font-family: var(--world-display);
+  font-size: clamp(2.45rem, 4.5vw, 4.7rem);
+  font-weight: 760;
+  line-height: 0.96;
+  letter-spacing: -0.06em;
+  text-wrap: balance;
+}
+
+.world-system-map-head p {
+  max-width: 32rem;
+  margin: 0;
+  color: #8f8c85;
+  line-height: 1.7;
+}
+
+.world-system-layers {
+  display: grid;
+  gap: 0.7rem;
+}
+
+.world-system-layers article {
+  display: grid;
+  grid-template-columns: 2.4rem minmax(8rem, 0.38fr) minmax(0, 1fr);
+  align-items: center;
+  gap: 1rem;
+  padding: 1.25rem 1.4rem;
+  border: 1px solid color-mix(in srgb, var(--project-accent) 16%, rgba(255, 255, 255, 0.09));
+  border-radius: 0.9rem;
+  background: color-mix(in srgb, var(--project-surface) 38%, #0d0e0d);
+}
+
+.world-system-layers article > span {
+  color: var(--project-accent);
+  font-family: var(--font-mono);
+  font-size: 0.63rem;
+}
+
+.world-system-layers h4 {
+  margin: 0;
+  color: #e7e4dd;
+  font-family: var(--world-display);
+  font-size: 1.08rem;
+}
+
+.world-system-layers p {
+  margin: 0;
+  color: #8f8c85;
+  font-size: 0.8rem;
+  line-height: 1.6;
+}
+
+.world-result small {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 0.75rem;
+  max-width: 48rem;
+  margin-top: 1.5rem;
+  color: #85827b;
+  font-size: 0.72rem;
+  line-height: 1.6;
+}
+
+.world-result small b {
+  color: var(--project-accent);
+  font-family: var(--font-mono);
+  font-size: 0.57rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+/* The evidence layer inherits the grammar of each project world. */
+.project-world-page[data-world="squadtactics"] .world-case-file,
+.project-world-page[data-world="squadtactics"] .world-system-layers article {
+  border-radius: 0.2rem;
+  border-color: rgba(85, 255, 40, 0.2);
+}
+
+.project-world-page[data-world="squadtactics"] .world-case-file > div,
+.project-world-page[data-world="squadtactics"] .world-system-layers article {
+  background-image:
+    linear-gradient(90deg, rgba(85, 255, 40, 0.055) 1px, transparent 1px),
+    linear-gradient(rgba(85, 255, 40, 0.055) 1px, transparent 1px);
+  background-size: 3rem 3rem;
+}
+
+.project-world-page[data-world="squadtactics"] .world-system-map-head h3,
+.project-world-page[data-world="squadtactics"] .world-system-layers h4 {
+  font-stretch: condensed;
+  text-transform: uppercase;
+}
+
+.project-world-page[data-world="helpdesk"] .world-case-file,
+.project-world-page[data-world="helpdesk"] .world-system-layers article {
+  border-radius: 0.45rem;
+}
+
+.project-world-page[data-world="helpdesk"] .world-system-layers article {
+  border-left: 4px solid rgba(88, 227, 207, 0.75);
+}
+
+.project-world-page[data-world="spoton"] .world-case-file,
+.project-world-page[data-world="spoton"] .world-system-layers article {
+  border-radius: 2rem;
+}
+
+.project-world-page[data-world="spoton"] .world-system-layers article {
+  background: linear-gradient(90deg, rgba(62, 169, 255, 0.12), transparent 45%), #071724;
+}
+
+.project-world-page[data-world="qnb"] .world-case-file {
+  border-radius: 2rem 0.5rem 2rem 0.5rem;
+}
+
+.project-world-page[data-world="qnb"] .world-system-map-head h3 {
+  font-weight: 400;
+}
+
+.project-world-page[data-world="qnb"] .world-system-layers article {
+  border-radius: 1.5rem 0.35rem 1.5rem 0.35rem;
+  background: linear-gradient(120deg, rgba(200, 108, 255, 0.09), transparent), #100c12;
+}
+
+.project-world-page[data-world="swizzle"] .world-case-file {
+  gap: 0.8rem;
+  overflow: visible;
+  border: 0;
+  background: transparent;
+}
+
+.project-world-page[data-world="swizzle"] .world-case-file > div {
+  border: 1px solid rgba(255, 255, 255, 0.13);
+  border-radius: 2.5rem 1rem 2.5rem 1rem;
+  background: linear-gradient(145deg, rgba(255, 91, 135, 0.14), transparent), #21102c;
+}
+
+.project-world-page[data-world="swizzle"] .world-system-layers article {
+  border-radius: 2.4rem 0.9rem 2.4rem 0.9rem;
+}
+
+/* 06 — AutoMate: native component modules connected by a machine bus. */
+.project-world-page[data-world="automate"] {
+  --world-display: "Segoe UI Variable Display", "Segoe UI", var(--font-sans);
+  --world-body: "Segoe UI Variable Text", "Segoe UI", var(--font-sans);
+}
+
+.project-world-page[data-world="automate"] .world-proof-heading h2,
+.project-world-page[data-world="automate"] .world-process-head h3,
+.project-world-page[data-world="automate"] .world-system-map-head h3 {
+  max-width: 14ch;
+  letter-spacing: -0.07em;
+}
+
+.project-world-page[data-world="automate"] .world-case-file,
+.project-world-page[data-world="automate"] .world-signals,
+.project-world-page[data-world="automate"] .world-process-grid {
+  gap: 0.75rem;
+  overflow: visible;
+  border: 0;
+  background: transparent;
+}
+
+.project-world-page[data-world="automate"] .world-case-file > div,
+.project-world-page[data-world="automate"] .world-signals article,
+.project-world-page[data-world="automate"] .world-story-grid article,
+.project-world-page[data-world="automate"] .world-system-layers article,
+.project-world-page[data-world="automate"] .world-process-grid article {
+  border: 1px solid rgba(165, 132, 255, 0.18);
+  border-radius: 1.4rem;
+  background:
+    radial-gradient(circle at 88% 14%, rgba(165, 132, 255, 0.13), transparent 8rem),
+    #100d16;
+}
+
+.project-world-page[data-world="automate"] .world-process-grid article {
+  position: relative;
+  min-height: 18rem;
+  overflow: hidden;
+}
+
+.project-world-page[data-world="automate"] .world-process-grid article::after {
+  position: absolute;
+  right: 1rem;
+  bottom: 1rem;
+  width: 2.4rem;
+  aspect-ratio: 1;
+  border: 1px dashed rgba(165, 132, 255, 0.38);
+  border-radius: 50%;
+  content: "";
+  box-shadow: 0 0 0 0.7rem rgba(165, 132, 255, 0.035);
+}
+
+.project-world-page[data-world="automate"] .world-result {
+  border-color: rgba(165, 132, 255, 0.28);
+  border-radius: 1.6rem;
+  background: radial-gradient(circle at 12% 30%, rgba(165, 132, 255, 0.2), transparent 28rem), #100d16;
+}
+
 /* The screen rail follows each product's interaction language too. */
 .screen-theater[data-world="squadtactics"] .theater-rail button { border-radius: 0.15rem; }
 .screen-theater[data-world="helpdesk"] .theater-rail button { border-radius: 0.35rem; }
 .screen-theater[data-world="spoton"] .theater-rail button { border-radius: 999px; }
 .screen-theater[data-world="qnb"] .theater-rail button { border-radius: 1.1rem 0.35rem 1.1rem 0.35rem; }
 .screen-theater[data-world="swizzle"] .theater-rail button { border-radius: 1.4rem 0.45rem 1.4rem 0.45rem; }
+.screen-theater[data-world="automate"] .theater-rail button { border-radius: 0.9rem; }
 
 @media (max-width: 54rem) {
   .constellation-node { min-width: 4rem; height: 2.25rem; padding-inline: 0.6rem; }
@@ -10094,6 +10459,11 @@ html[data-aura-project="automate"] .project-aura-world[data-aura-world="automate
 
   .project-world-page[data-world="spoton"] .world-process-grid::before { display: none; }
   .project-world-page[data-world="swizzle"] .world-process-grid article:nth-child(n) { transform: none; }
+
+  .world-case-file { grid-template-columns: 1fr; }
+  .world-case-file > div { min-height: 0; }
+  .world-case-file p { margin-top: 1.5rem; }
+  .world-system-map { grid-template-columns: 1fr; gap: 2rem; }
 }
 
 @media (max-width: 36rem) {
@@ -10131,6 +10501,16 @@ html[data-aura-project="automate"] .project-aura-world[data-aura-world="automate
   .project-world-page[data-world="qnb"] .world-process-grid p { grid-column: 1 / -1; padding: 0; border: 0; }
 
   .project-world-page[data-world="helpdesk"] .world-result::after { display: none; }
+
+  .world-system-layers article {
+    grid-template-columns: 2rem minmax(0, 1fr);
+  }
+
+  .world-system-layers p {
+    grid-column: 1 / -1;
+  }
+
+  .world-result small { grid-template-columns: 1fr; }
 }
 
 /* Full-bleed world entrance with the portfolio's floating navigation. */
@@ -10246,4 +10626,119 @@ html[data-aura-project="automate"] .project-aura-world[data-aura-world="automate
 
 @media (pointer: coarse), (prefers-reduced-motion: reduce) {
   .ending-word-signal { transform: translate3d(-50%, -72%, 0); }
+}
+
+/* v30 refinements: viewport-fit worlds and project-specific case-study alignment. */
+@media (min-width: 55rem) {
+  .project-world-page[data-world="squadtactics"] .world-intro,
+  .project-world-page[data-world="helpdesk"] .world-intro {
+    box-sizing: border-box;
+    min-height: 100svh;
+    padding-top: clamp(7rem, 8.5vh, 8.25rem);
+    padding-bottom: clamp(1.75rem, 3.5vh, 3rem);
+  }
+
+  .project-world-page[data-world="squadtactics"] .world-intro h1,
+  .project-world-page[data-world="helpdesk"] .world-intro h1 {
+    font-size: clamp(5.2rem, 8.1vw, 8rem);
+  }
+
+  .project-world-page[data-world="squadtactics"] .world-headline,
+  .project-world-page[data-world="helpdesk"] .world-headline {
+    margin-top: clamp(1rem, 2vh, 1.5rem);
+    font-size: clamp(1.65rem, 2.25vw, 2.3rem);
+  }
+
+  .project-world-page[data-world="squadtactics"] .world-intro-bottom,
+  .project-world-page[data-world="helpdesk"] .world-intro-bottom {
+    margin-top: clamp(1.5rem, 3.5vh, 2.6rem);
+    padding-top: 1rem;
+  }
+
+  .project-world-page[data-world="helpdesk"] .world-live-demo {
+    min-height: clamp(5rem, 11vh, 6.5rem);
+  }
+}
+
+/* SquadTactics reads like a centered match graphic. */
+.project-world-page[data-world="squadtactics"] .world-proof-heading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  text-align: center;
+}
+
+.project-world-page[data-world="squadtactics"] .world-proof-heading h2 {
+  max-width: 10ch;
+  margin-inline: auto;
+}
+
+/* HelpDesk follows a strict, left-aligned operations column. */
+.project-world-page[data-world="helpdesk"] .world-proof-heading {
+  display: flex;
+  width: min(100%, 72rem);
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.9rem;
+  margin-inline: auto;
+  text-align: left;
+}
+
+.project-world-page[data-world="helpdesk"] .world-proof-heading h2 {
+  max-width: 16ch;
+  margin: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .role-signal-value,
+  .role-signal-track i {
+    animation: none;
+  }
+
+  .role-signal-track i { transform: scaleX(1); }
+}
+
+/* v31: finish the project-specific hero and case-study compositions. */
+@media (min-width: 55rem) {
+  .project-world-page[data-world="squadtactics"] .world-intro {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    align-content: center;
+    padding-top: 8rem;
+    padding-bottom: 2.5rem;
+  }
+
+  .project-world-page[data-world="squadtactics"] .world-intro h1 {
+    max-width: 9ch;
+    font-size: clamp(5.8rem, 8.8vw, 9rem);
+  }
+}
+
+/* SpotON uses a centered destination statement. */
+.project-world-page[data-world="spoton"] .world-proof-heading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  text-align: center;
+}
+
+.project-world-page[data-world="spoton"] .world-proof-heading h2 {
+  max-width: 15ch;
+  margin-inline: auto;
+}
+
+/* QNB keeps its editorial serif voice, now with intentional alignment. */
+.project-world-page[data-world="qnb"] .world-proof-heading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.1rem;
+  text-align: center;
+}
+
+.project-world-page[data-world="qnb"] .world-proof-heading h2 {
+  max-width: 15ch;
+  margin-inline: auto;
 }

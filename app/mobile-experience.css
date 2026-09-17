@@ -321,13 +321,25 @@
     opacity: calc(1 - var(--mobile-intro-progress) * 0.12);
   }
 
-  .mobile-intro-copy > p:first-child {
+  .mobile-intro-copy > p:first-child,
+  .mobile-intro-copy > .mobile-role {
     margin: 0 0 1.1rem;
     color: #d8ff45;
     font-family: var(--font-mono);
     font-size: 0.63rem;
     text-transform: uppercase;
   }
+
+  .mobile-intro-copy > .mobile-role {
+    display: grid;
+    width: 100%;
+    min-width: 0;
+    margin-bottom: 1.35rem;
+    padding-block: 0.65rem;
+  }
+
+  .mobile-role .role-signal-label { display: none; }
+  .mobile-role .role-signal-value { font-size: clamp(1rem, 4.5vw, 1.2rem); }
 
   .mobile-intro h1 {
     display: grid;

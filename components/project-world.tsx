@@ -6,6 +6,7 @@ import { AmbientEffects } from "@/components/ambient-effects"
 import { ProjectHeroAtmosphere } from "@/components/project-hero-atmosphere"
 import { ScreenTheater } from "@/components/screen-theater"
 import { SiteNav } from "@/components/site-nav"
+import { caseStudies } from "@/lib/case-studies"
 import type { Project } from "@/lib/portfolio"
 
 type ProjectWorldProps = {
@@ -109,6 +110,7 @@ const worldLanguage: Record<string, {
 
 export function ProjectWorld({ project, nextProject, total }: ProjectWorldProps) {
   const language = worldLanguage[project.id] ?? worldLanguage.squadtactics
+  const caseStudy = caseStudies[project.id]
 
   return (
     <main
@@ -161,14 +163,31 @@ export function ProjectWorld({ project, nextProject, total }: ProjectWorldProps)
           <h2 id={`${project.id}-proof`}>{language.proofTitle}</h2>
         </div>
 
+        <div className="world-case-file" aria-label={`${project.title} case study brief`}>
+          <div>
+            <span>Audience</span>
+            <p>{caseStudy.audience}</p>
+          </div>
+          <div>
+            <span>Delivered scope</span>
+            <p>{caseStudy.scope}</p>
+          </div>
+          <div>
+            <span>Defining constraint</span>
+            <p>{caseStudy.constraint}</p>
+          </div>
+        </div>
+
         <div className="world-signals">
-          {project.signals.map((signal) => (
-            <article key={signal.label}>
-              <strong>{signal.value}</strong>
-              <span>{signal.label}</span>
+          {caseStudy.metrics.map((metric) => (
+            <article key={metric.label}>
+              <strong>{metric.value}</strong>
+              <span>{metric.label}</span>
+              <p>{metric.detail}</p>
             </article>
           ))}
         </div>
+        <p className="world-evidence-note">Verified evidence · {caseStudy.evidenceNote}</p>
 
         <div className="world-story-grid">
           <article>
@@ -195,9 +214,26 @@ export function ProjectWorld({ project, nextProject, total }: ProjectWorldProps)
           </ol>
         </div>
 
+        <div className="world-system-map">
+          <div className="world-system-map-head">
+            <span>System architecture</span>
+            <h3>{caseStudy.systemTitle}</h3>
+            <p>{caseStudy.systemIntro}</p>
+          </div>
+          <div className="world-system-layers">
+            {caseStudy.systemLayers.map((layer, index) => (
+              <article key={layer.title}>
+                <span>{String(index + 1).padStart(2, "0")}</span>
+                <h4>{layer.title}</h4>
+                <p>{layer.text}</p>
+              </article>
+            ))}
+          </div>
+        </div>
+
         <div className="world-process">
           <div className="world-process-head">
-            <span>{language.processLabel}</span>
+            <span>{language.processLabel} · SDLC</span>
             <h3>{language.processTitle}</h3>
           </div>
           <div className="world-process-grid" data-process-world={project.id}>
@@ -215,6 +251,7 @@ export function ProjectWorld({ project, nextProject, total }: ProjectWorldProps)
           <div>
             <span>{language.resultLabel}</span>
             <p>{project.outcome}</p>
+            <small><b>Next validation</b>{caseStudy.reflection}</small>
           </div>
           <div className="world-tools" aria-label="Tools used">
             {project.tools.map((tool) => <span key={tool}>{tool}</span>)}

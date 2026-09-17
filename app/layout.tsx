@@ -6,9 +6,9 @@ import { AdaptiveMotion } from "@/components/adaptive-motion";
 import { RouteTransition } from "@/components/route-transition";
 
 export const metadata: Metadata = {
-  title: "Ahmed Saaied — Product Engineer",
+  title: "Ahmed Saaied — Software Developer",
   description:
-    "Portfolio of Ahmed Saaied, a product-minded developer crafting high-performance mobile apps, web systems, and thoughtful digital experiences.",
+    "Portfolio of Ahmed Saaied, a software developer building mobile applications, full-stack web products, and clear digital experiences.",
   icons: {
     icon: [
       { url: "/favicon-96.png", type: "image/png", sizes: "96x96" },
@@ -16,13 +16,7 @@ export const metadata: Metadata = {
       { url: "/favicon.svg", type: "image/svg+xml", sizes: "any" },
     ],
     shortcut: "/favicon.ico",
-    apple: [
-      {
-        url: "/favicon-192.png",
-        type: "image/png",
-        sizes: "192x192",
-      },
-    ],
+    apple: [{ url: "/favicon-192.png", type: "image/png", sizes: "192x192" }],
   },
 };
 

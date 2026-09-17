@@ -1,4 +1,4 @@
-import { ArrowDownRight, ArrowRight, Link, MapPin } from "lucide-react"
+import { ArrowDownRight, ArrowRight, MapPin } from "lucide-react"
 import type { CSSProperties } from "react"
 
 import { AmbientEffects } from "@/components/ambient-effects"
@@ -12,6 +12,7 @@ import { MobilePortfolio } from "@/components/mobile-portfolio"
 import { ProjectAura } from "@/components/project-aura"
 import { ProjectShowcase } from "@/components/project-showcase"
 import { Reveal } from "@/components/reveal"
+import { RotatingRole } from "@/components/rotating-role"
 import { SiteNav } from "@/components/site-nav"
 import { projects } from "@/lib/portfolio"
 
@@ -35,13 +36,14 @@ export function PortfolioExperience() {
               <span className="eyebrow-line" />
               <span><MapPin aria-hidden="true" /> Cairo, Egypt</span>
             </div>
+            <RotatingRole className="hero-role hero-enter" />
             <h1 id="hero-title" className="hero-enter" style={{ "--enter-delay": "180ms" } as CSSProperties}>
               <span>I build digital</span>
               <span>products that</span>
               <span>feel <em>obvious.</em></span>
             </h1>
             <p className="hero-intro hero-enter" style={{ "--enter-delay": "280ms" } as CSSProperties}>
-              Product-minded developer crafting high-performance mobile experiences, practical web systems, and interfaces where every detail earns its place.
+              Software developer building mobile apps, full-stack web products, and interfaces that make complex work easier to understand.
             </p>
             <div className="hero-actions hero-enter" style={{ "--enter-delay": "360ms" } as CSSProperties}>
               <a className="primary-action" href="#work" data-magnetic data-cursor="Explore">
@@ -146,19 +148,6 @@ export function PortfolioExperience() {
 
         <CinematicEnding />
       </main>
-
-      <footer className="site-footer">
-        <div className="section-shell">
-          <div>
-            <strong>Ahmed Saaied</strong>
-            <span>Product engineer · Cairo, Egypt</span>
-          </div>
-          <a href="https://www.linkedin.com/in/ahmed-saaied-904a23372" target="_blank" rel="noreferrer" data-cursor="LinkedIn">
-            <Link aria-hidden="true" /> LinkedIn
-          </a>
-          <span>Designed &amp; engineered with intent · 2026</span>
-        </div>
-      </footer>
     </>
   )
 }

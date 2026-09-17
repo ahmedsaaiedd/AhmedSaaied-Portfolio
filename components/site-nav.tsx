@@ -15,7 +15,7 @@ const homeLinks = [
 const worldLinks = [
   { href: "#top", label: "Overview" },
   { href: "#screens", label: "Screens" },
-  { href: "#system", label: "System" },
+  { href: "#system", label: "Case study" },
   { href: "#next-world", label: "Next" },
 ]
 
@@ -252,7 +252,7 @@ export function SiteNav({ mode = "home", worldCount }: SiteNavProps) {
             return <a key={link.href} href={link.href === "#work" ? "#mobile-work" : link.href}
               data-active={active === link.href} aria-current={active === link.href ? "location" : undefined}
               onClick={(event) => handleDockClick(event, link.href)}>
-              <Icon aria-hidden="true" /><span>{link.label === "Capabilities" ? "Skills" : link.label}</span>
+              <Icon aria-hidden="true" /><span>{link.label === "Capabilities" ? "Skills" : link.label === "Case study" ? "Case" : link.label}</span>
             </a>
           })}
       </nav>

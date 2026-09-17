@@ -79,7 +79,7 @@ export function CinematicEnding() {
             </em>
           </h2>
           <p>
-            Bring the complicated workflow, the unfinished idea, or the product that needs to feel calmer. I&apos;ll help shape the system and build the experience around it.
+            Tell me what you&apos;re building, where it becomes difficult, and what needs to work better. I can help define the system, design the interface, and build the product.
           </p>
           <div className="ending-actions">
             <a className="ending-primary-action" href="mailto:ahmedsaaied117@gmail.com" data-magnetic data-cursor="Send mail">
@@ -99,6 +99,10 @@ export function CinematicEnding() {
           </div>
         </Reveal>
         <div className="ending-status" aria-hidden="true"><i /> Cairo · available for selected work</div>
+        <div className="ending-signoff" aria-label="Portfolio colophon">
+          <span>© 2026 Ahmed Saaied</span>
+          <span>Designed and engineered in Cairo</span>
+        </div>
       </div>
     </section>
   )

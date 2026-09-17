@@ -6,6 +6,7 @@ import Link from "next/link"
 import { ArrowDown, ArrowUpRight, ExternalLink, MapPin } from "lucide-react"
 
 import { projects } from "@/lib/portfolio"
+import { RotatingRole } from "@/components/rotating-role"
 
 const projectScenes: Record<string, { label: string; detail: string; image: number }> = {
   squadtactics: { label: "Matchday system", detail: "11 players · 6 formations · live logic", image: 2 },
@@ -75,7 +76,7 @@ export function MobilePortfolio() {
     <div className="mobile-portfolio" aria-label="Ahmed Saaied mobile portfolio">
       <section ref={introRef} className="mobile-intro" id="mobile-top" aria-labelledby="mobile-hero-title">
         <div className="mobile-intro-grid" aria-hidden="true" />
-        <div className="mobile-identity" aria-label="Ahmed Saaied, product designer and developer in Cairo">
+        <div className="mobile-identity" aria-label="Ahmed Saaied, software developer in Cairo">
           <span className="mobile-identity-index">Portfolio / 2026</span>
           <div className="mobile-identity-name" aria-hidden="true">
             <span>Ahmed</span>
@@ -89,7 +90,7 @@ export function MobilePortfolio() {
         </div>
 
         <div className="mobile-intro-copy">
-          <p>Product designer + developer</p>
+          <RotatingRole className="mobile-role" />
           <h1 id="mobile-hero-title">
             <span>I build</span>
             <span>digital products</span>
