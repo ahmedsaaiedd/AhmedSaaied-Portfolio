@@ -2,6 +2,7 @@ import { ArrowDownRight, ArrowRight, Link, MapPin } from "lucide-react"
 import type { CSSProperties } from "react"
 
 import { AmbientEffects } from "@/components/ambient-effects"
+import { ApproachLens } from "@/components/approach-lens"
 import { CapabilityAtlas } from "@/components/capability-atlas"
 import { CinematicIntro } from "@/components/cinematic-intro"
 import { CommandPalette } from "@/components/command-palette"
@@ -13,29 +14,6 @@ import { ProjectShowcase } from "@/components/project-showcase"
 import { Reveal } from "@/components/reveal"
 import { SiteNav } from "@/components/site-nav"
 import { projects } from "@/lib/portfolio"
-
-const process = [
-  {
-    number: "01",
-    title: "Find the real problem",
-    text: "I map the people, decisions, edge cases, and constraints before the interface starts pretending everything is simple.",
-  },
-  {
-    number: "02",
-    title: "Make the system visible",
-    text: "Flows, hierarchy, and states become a clear product model. The visual language grows from that structure.",
-  },
-  {
-    number: "03",
-    title: "Build the feeling",
-    text: "Responsive components, precise motion, and careful feedback turn static screens into a product that feels alive.",
-  },
-  {
-    number: "04",
-    title: "Pressure-test the details",
-    text: "Empty states, failures, long content, touch targets, performance, and real devices all get a seat at the table.",
-  },
-]
 
 export function PortfolioExperience() {
   return (
@@ -145,41 +123,7 @@ export function PortfolioExperience() {
               </p>
             </Reveal>
 
-            <div className="decision-lab-stage">
-              <div className="lab-input" aria-hidden="true">
-                <span>Raw complexity</span>
-                <i /><i /><i /><i /><i />
-              </div>
-
-              <div className="lab-process">
-                {process.map((item, index) => (
-                  <Reveal key={item.number} delay={index * 70}>
-                    <article className="lab-step">
-                      <span>{item.number}</span>
-                      <div>
-                        <h3>{item.title}</h3>
-                        <p>{item.text}</p>
-                      </div>
-                      <ArrowRight aria-hidden="true" />
-                    </article>
-                  </Reveal>
-                ))}
-              </div>
-
-              <Reveal className="lab-output">
-                <span>Resolved product</span>
-                <div className="lab-interface" aria-hidden="true">
-                  <div className="lab-window-dots"><i /><i /><i /></div>
-                  <small>System resolved</small>
-                  <strong>One clear next action</strong>
-                  <p>Complexity translated into a calm, understandable product hierarchy.</p>
-                  <div className="lab-result-map">
-                    <span>Context</span><ArrowRight /><span>Decision</span><ArrowRight /><span>Feedback</span>
-                  </div>
-                </div>
-                <small>Signal / 100%</small>
-              </Reveal>
-            </div>
+            <Reveal><ApproachLens /></Reveal>
           </div>
         </section>
 

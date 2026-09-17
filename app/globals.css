@@ -1867,6 +1867,214 @@ html[data-pointer="visible"] .pointer-halo {
   }
 }
 
+/* Decision Lens — compact, interactive approach system. */
+.decision-lab {
+  padding-block: clamp(5.5rem, 7vw, 7rem);
+}
+
+.decision-lab-heading {
+  grid-template-columns: minmax(0, 0.9fr) minmax(18rem, 0.48fr);
+  gap: clamp(2rem, 5vw, 5rem);
+}
+
+.decision-lab-heading h2 {
+  max-width: none;
+  font-size: clamp(3.5rem, 5.35vw, 5.6rem);
+  white-space: nowrap;
+}
+
+.decision-lens {
+  --lens-accent: #d8ff45;
+  position: relative;
+  margin-top: clamp(2.4rem, 4vw, 3.6rem);
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.11);
+  border-radius: 1.8rem;
+  background:
+    linear-gradient(90deg, rgba(255, 255, 255, 0.025) 1px, transparent 1px),
+    linear-gradient(rgba(255, 255, 255, 0.025) 1px, transparent 1px),
+    radial-gradient(circle at 42% 52%, rgba(216, 255, 69, 0.075), transparent 22rem),
+    rgba(8, 10, 8, 0.88);
+  background-size: 4rem 4rem, 4rem 4rem, auto, auto;
+}
+
+.lens-topline {
+  display: flex;
+  min-height: 4.4rem;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 1.5rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  color: #79766f;
+  font-family: var(--font-mono);
+  font-size: 0.55rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.lens-topline > span { color: var(--lens-accent); }
+.lens-topline p { display: flex; align-items: center; gap: 0.55rem; margin: 0; }
+.lens-topline p i { width: 0.42rem; aspect-ratio: 1; border-radius: 50%; background: var(--lens-accent); box-shadow: 0 0 1rem rgba(216, 255, 69, 0.7); }
+
+.lens-workspace {
+  display: grid;
+  min-height: 27rem;
+  grid-template-columns: 8rem minmax(20rem, 0.8fr) minmax(25rem, 1.2fr);
+  align-items: stretch;
+}
+
+.lens-controls {
+  grid-column: 1;
+  grid-row: 1;
+  display: grid;
+  grid-template-rows: repeat(4, 1fr);
+  border-right: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.lens-controls button {
+  position: relative;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  align-content: center;
+  align-items: center;
+  gap: 0.25rem 0.65rem;
+  padding: 0.9rem 1rem;
+  border: 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+  background: transparent;
+  color: #77746d;
+  cursor: pointer;
+  text-align: left;
+  transition: color 220ms ease, background-color 260ms ease;
+}
+
+.lens-controls button:last-child { border-bottom: 0; }
+.lens-controls button::after { position: absolute; inset: 15% auto 15% 0; width: 2px; transform: scaleY(0); background: var(--lens-accent); content: ""; transition: transform 300ms cubic-bezier(.16, 1, .3, 1); }
+.lens-controls button[data-active="true"] { color: #f2efe8; background: rgba(216, 255, 69, 0.045); }
+.lens-controls button[data-active="true"]::after { transform: scaleY(1); }
+.lens-controls button > span { color: #56534e; font: 0.48rem var(--font-mono); }
+.lens-controls button svg { grid-row: 1 / 3; width: 1rem; color: var(--lens-accent); opacity: 0.68; }
+.lens-controls button strong { font-size: 0.72rem; }
+
+.lens-orbit {
+  position: relative;
+  grid-column: 2;
+  grid-row: 1;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  border-right: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.lens-rings,
+.lens-rings::before,
+.lens-rings::after {
+  position: absolute;
+  width: min(22rem, 82%);
+  aspect-ratio: 1;
+  border: 1px solid rgba(216, 255, 69, 0.17);
+  border-radius: 50%;
+  content: "";
+}
+
+.lens-rings { animation: lens-spin 26s linear infinite; }
+.lens-rings::before { inset: 13%; width: auto; border-style: dashed; }
+.lens-rings::after { inset: 31%; width: auto; background: rgba(216, 255, 69, 0.025); }
+.lens-rings > i { position: absolute; width: 0.5rem; aspect-ratio: 1; border-radius: 50%; background: var(--lens-accent); box-shadow: 0 0 1.2rem rgba(216, 255, 69, 0.8); }
+.lens-rings > i:first-child { top: 8%; left: 27%; }
+.lens-rings > i:nth-child(2) { right: -0.25rem; top: 48%; }
+.lens-rings > i:last-child { bottom: 8%; left: 30%; opacity: 0.36; }
+
+.lens-core {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  width: 8.5rem;
+  aspect-ratio: 1;
+  place-content: center;
+  border: 1px solid rgba(216, 255, 69, 0.25);
+  border-radius: 50%;
+  background: rgba(10, 12, 9, 0.91);
+  text-align: center;
+  box-shadow: 0 0 4rem rgba(216, 255, 69, 0.08);
+}
+.lens-core small { color: #68655f; font: 0.46rem var(--font-mono); letter-spacing: 0.1em; text-transform: uppercase; }
+.lens-core strong { margin-top: 0.15rem; color: var(--lens-accent); font-size: 2.4rem; line-height: 1; }
+.lens-core span { color: #efede7; font-size: 0.72rem; font-weight: 750; }
+
+.lens-output {
+  display: flex;
+  grid-column: 3;
+  grid-row: 1;
+  min-width: 0;
+  flex-direction: column;
+  justify-content: center;
+  padding: clamp(2rem, 4vw, 4.2rem);
+}
+.lens-output > span { display: flex; align-items: center; gap: 0.55rem; color: var(--lens-accent); font: 0.55rem var(--font-mono); letter-spacing: 0.1em; text-transform: uppercase; }
+.lens-output > span svg { width: 0.95rem; }
+.lens-output h3 { max-width: 12ch; margin: 1.2rem 0 0; font-size: clamp(2.2rem, 3.7vw, 4rem); line-height: 0.94; letter-spacing: -0.055em; }
+.lens-output > p { max-width: 38rem; margin: 1.15rem 0 0; color: #8d8a83; font-size: 0.9rem; line-height: 1.7; }
+.lens-signal { display: flex; align-items: center; justify-content: space-between; gap: 1rem; margin-top: 2rem; padding-top: 1rem; border-top: 1px solid rgba(255, 255, 255, 0.09); color: #77746d; }
+.lens-signal small { font: 0.5rem var(--font-mono); letter-spacing: 0.08em; text-transform: uppercase; }
+.lens-signal svg { width: 1rem; color: var(--lens-accent); }
+
+@keyframes lens-spin { to { transform: rotate(360deg); } }
+
+/* The signal is part of the i without changing the original headline flow. */
+.ending-obvious-word,
+.ending-signal-letter {
+  position: relative;
+  display: inline-block !important;
+}
+.ending-obvious-word { white-space: nowrap; }
+.ending-word-signal {
+  position: absolute;
+  z-index: 3;
+  left: 50%;
+  top: 0.08em;
+  width: 0.105em;
+  aspect-ratio: 1;
+  transform: translate3d(calc(-50% + var(--signal-x) * 1rem), calc(-130% + var(--signal-y) * 0.65rem), 0);
+  border-radius: 50%;
+  background: currentColor;
+  box-shadow: 0 0 0.22em rgba(216, 255, 69, 0.82), 0 0 0.58em rgba(216, 255, 69, 0.34);
+  transition: transform 520ms cubic-bezier(.16, 1, .3, 1);
+  will-change: transform;
+}
+.ending-convergence-core { background: transparent; box-shadow: none; }
+
+@media (max-width: 70rem) {
+  .lens-workspace { grid-template-columns: 7rem minmax(16rem, 0.72fr) minmax(22rem, 1.1fr); }
+}
+
+@media (max-width: 54rem) {
+  .decision-lab { padding-block: 6rem; }
+  .decision-lab-heading { grid-template-columns: 1fr; gap: 1.4rem; }
+  .decision-lab-heading .section-kicker { grid-column: auto; }
+  .decision-lab-heading h2 { font-size: clamp(3.35rem, 12vw, 5.8rem); }
+  .decision-lens { border-radius: 1.45rem; }
+  .lens-topline { min-height: 3.8rem; padding-inline: 1rem; }
+  .lens-workspace { display: flex; min-height: 0; flex-direction: column; }
+  .lens-controls { order: 1; display: grid; grid-template: 1fr / repeat(4, 1fr); border-right: 0; border-bottom: 1px solid rgba(255,255,255,.08); overflow-x: auto; }
+  .lens-controls button { display: flex; min-width: 5rem; min-height: 4.8rem; flex-direction: column; justify-content: center; gap: 0.3rem; padding: 0.65rem 0.35rem; border-right: 1px solid rgba(255,255,255,.07); border-bottom: 0; text-align: center; }
+  .lens-controls button::after { inset: auto 18% 0; width: auto; height: 2px; transform: scaleX(0); }
+  .lens-controls button[data-active="true"]::after { transform: scaleX(1); }
+  .lens-controls button svg { grid-row: auto; width: 0.9rem; }
+  .lens-controls button > span { position: absolute; top: 0.45rem; right: 0.45rem; }
+  .lens-orbit { order: 2; min-height: 13rem; border-right: 0; border-bottom: 1px solid rgba(255,255,255,.08); }
+  .lens-rings { width: 12rem; }
+  .lens-core { width: 6.8rem; }
+  .lens-core strong { font-size: 1.9rem; }
+  .lens-output { order: 3; min-height: 18rem; padding: 1.6rem; }
+  .lens-output h3 { font-size: clamp(2.25rem, 10vw, 3.5rem); }
+}
+
+@media (pointer: coarse), (prefers-reduced-motion: reduce) {
+  .ending-word-signal { transform: translate3d(-50%, -130%, 0); transition: none; }
+  .lens-rings { animation: none; }
+}
+
 /* AutoMate — a quiet living-machine interface, built from pulse rings,
    instrument readouts and violet memory light. */
 .hero-world-art.hero-world-automate {
@@ -10001,4 +10209,41 @@ html[data-aura-project="automate"] .project-aura-world[data-aura-world="automate
     padding-right: max(1rem, env(safe-area-inset-right));
     padding-left: max(1rem, env(safe-area-inset-left));
   }
+}
+
+/* Final cascade guards for the compact approach and single contact signal. */
+.decision-lab { padding-block: clamp(5.5rem, 7vw, 7rem); }
+.decision-lab-heading {
+  grid-template-columns: minmax(0, 0.9fr) minmax(18rem, 0.48fr);
+  gap: clamp(2rem, 5vw, 5rem);
+}
+.decision-lab-heading h2 {
+  max-width: none;
+  font-size: clamp(3.5rem, 5.35vw, 5.6rem);
+  white-space: nowrap;
+}
+.ending-obvious-word,
+.ending-signal-letter { display: inline-block !important; }
+.ending-obvious-word { white-space: nowrap; }
+.ending-convergence-core { background: transparent; box-shadow: none; }
+
+@media (max-width: 54rem) {
+  .decision-lab { padding-block: 6rem; }
+  .decision-lab-heading { grid-template-columns: 1fr; gap: 1.4rem; }
+  .decision-lab-heading .section-kicker { grid-column: auto; }
+  .decision-lab-heading h2 { font-size: clamp(2.4rem, 10vw, 4.8rem); }
+}
+
+.ending-word-signal {
+  margin-left: 3px;
+  top: 0.17em;
+  transform: translate3d(
+    calc(-50% + var(--signal-x) * 0.48rem),
+    calc(-72% + var(--signal-y) * 0.3rem),
+    0
+  );
+}
+
+@media (pointer: coarse), (prefers-reduced-motion: reduce) {
+  .ending-word-signal { transform: translate3d(-50%, -72%, 0); }
 }

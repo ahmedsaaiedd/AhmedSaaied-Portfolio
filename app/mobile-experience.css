@@ -5,6 +5,15 @@
   display: none;
 }
 
+/*
+ * Keep the fill-image containing block valid even while the separate mobile
+ * experience is mounted outside its active breakpoint. The mobile rule below
+ * promotes this to absolute positioning when the experience becomes visible.
+ */
+.mobile-device-frame {
+  position: relative;
+}
+
 @media (max-width: 54rem) {
   html {
     scroll-padding-bottom: calc(5.75rem + env(safe-area-inset-bottom));

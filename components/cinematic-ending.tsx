@@ -74,7 +74,9 @@ export function CinematicEnding() {
           <span className="section-kicker">04 / Start the next system</span>
           <h2 id="ending-title">
             <span className="ending-title-question">Have a difficult product?</span>
-            <em className="ending-title-answer">Let&apos;s make it feel obvious.</em>
+            <em className="ending-title-answer" aria-label="Let's make it feel obvious.">
+              Let&apos;s make it feel <span className="ending-obvious-word" aria-hidden="true">obv<span className="ending-signal-letter">ı<i className="ending-word-signal" /></span>ous.</span>
+            </em>
           </h2>
           <p>
             Bring the complicated workflow, the unfinished idea, or the product that needs to feel calmer. I&apos;ll help shape the system and build the experience around it.
