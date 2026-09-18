@@ -51,6 +51,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
         <RouteTransition />
         {children}
         <Analytics />
+        <SpeedInsights />
         <AnalyticsEvents />
       </body>
     </html>
