@@ -57,7 +57,7 @@ export function CommandPalette() {
   }
 
   const copyEmail = async () => {
-    await navigator.clipboard.writeText("ahmedsaaied117@gmail.com")
+    await navigator.clipboard.writeText("ahmedsaaiedd@gmail.com")
     setCopied(true)
     window.setTimeout(() => {
       setCopied(false)

@@ -19,8 +19,11 @@ export async function generateMetadata({ params }: ProjectPageProps): Promise<Me
   if (!project) return {}
 
   return {
-    title: `${project.title} — Ahmed Saaied`,
+    title: project.title,
     description: project.summary,
+    alternates: { canonical: `/work/${project.id}` },
+    openGraph: { title: `${project.title} — Ahmed Saaied`, description: project.summary, url: `/work/${project.id}`, type: "article", images: ["/opengraph-image"] },
+    twitter: { card: "summary_large_image", title: `${project.title} — Ahmed Saaied`, description: project.summary, images: ["/twitter-image"] },
   }
 }
 

@@ -6,8 +6,11 @@ import { TransitionLink } from "@/components/transition-link"
 import styles from "./resume.module.css"
 
 export const metadata: Metadata = {
-  title: "Resume — Ahmed Saaied",
+  title: "Resume",
   description: "Ahmed Saaied's focused Flutter, full-stack, and product design resumes.",
+  alternates: { canonical: "/resume" },
+  openGraph: { title: "Ahmed Saaied — Resume", description: "Focused Flutter, full-stack, and product design resumes by Ahmed Saaied.", url: "/resume", images: ["/opengraph-image"] },
+  twitter: { card: "summary_large_image", title: "Ahmed Saaied — Resume", description: "Focused Flutter, full-stack, and product design resumes by Ahmed Saaied.", images: ["/twitter-image"] },
 }
 
 const paths = [
@@ -95,10 +98,10 @@ export default function ResumePage() {
             </div>
             <div className={styles.orbit} aria-hidden="true"><i /><i /><i /></div>
             <div className={styles.actions}>
-              <a className={styles.primary} href={path.pdf} target="_blank" rel="noreferrer" data-magnetic data-cursor="Open PDF">
+              <a className={styles.primary} href={path.pdf} target="_blank" rel="noreferrer" data-magnetic data-cursor="Open PDF" data-analytics-event="resume_pdf_opened" data-analytics-discipline={path.id}>
                 Open résumé <ArrowUpRight aria-hidden="true" />
               </a>
-              <a className={styles.secondary} href={path.pdf} download data-cursor="Download">
+              <a className={styles.secondary} href={path.pdf} download data-cursor="Download" data-analytics-event="resume_downloaded" data-analytics-discipline={path.id}>
                 <Download aria-hidden="true" /> Download PDF
               </a>
             </div>
@@ -108,7 +111,7 @@ export default function ResumePage() {
 
       <footer className={styles.footer}>
         <p>Not sure which one fits?</p>
-        <a href="mailto:ahmedsaaied117@gmail.com">Start a conversation <ArrowUpRight aria-hidden="true" /></a>
+        <a href="mailto:ahmedsaaiedd@gmail.com" data-analytics-event="contact_clicked" data-analytics-source="resume_page">Start a conversation <ArrowUpRight aria-hidden="true" /></a>
       </footer>
 
       <nav className={styles.mobileDock} aria-label="Resume path navigation">

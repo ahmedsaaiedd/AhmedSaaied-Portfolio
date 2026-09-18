@@ -15,6 +15,7 @@ export type Project = {
   imageAlt: string
   landscape?: boolean
   liveUrl?: string
+  githubUrl?: string
   challenge: string
   decisions: string[]
   outcome: string
@@ -139,7 +140,8 @@ export const projects: Project[] = [
     ],
     imageAlt: "HelpDesk Lite role-based support management web application",
     landscape: true,
-    liveUrl: "https://helpdesk-lite-6yxdkgqvz-ahmedsaaiedd.vercel.app/login",
+    liveUrl: "https://helpdesk-lite-ochre.vercel.app/login",
+    githubUrl: "https://github.com/ahmedsaaiedd/helpdesk-lite",
     challenge:
       "Internal support often disappears into chat threads and unclear ownership. The product needed to make every request traceable while keeping employee submission, support handling, and management oversight focused and easy to learn.",
     decisions: [
@@ -209,6 +211,7 @@ export const projects: Project[] = [
       "/projects/spoton/Screenshot_20260910_124843.jpg",
     ],
     imageAlt: "SpotON parking companion mobile app",
+    githubUrl: "https://github.com/ahmedsaaiedd/SpotON",
     challenge:
       "Parking apps often expose the system instead of helping the driver. The key was reducing choice at the right moments while keeping availability, distance, price, and timing visible.",
     decisions: [

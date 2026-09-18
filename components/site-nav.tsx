@@ -187,7 +187,7 @@ export function SiteNav({ mode = "home", worldCount }: SiteNavProps) {
           </a>
         ))}
         {mode === "home" && (
-          <TransitionLink className="resume-nav-link" href="/resume" data-cursor="Resume">Resume</TransitionLink>
+          <TransitionLink className="resume-nav-link" href="/resume" data-cursor="Resume" data-analytics-event="resume_opened" data-analytics-source="navigation">Resume</TransitionLink>
         )}
         {mode === "home" && (
           <button type="button" className="command-launch" onClick={openCommands} aria-label="Open command center">
@@ -204,7 +204,7 @@ export function SiteNav({ mode = "home", worldCount }: SiteNavProps) {
           {worldCount && <small>{worldCount}</small>}
         </Link>
       ) : (
-        <a className="availability" href="mailto:ahmedsaaied117@gmail.com" data-magnetic data-cursor="Connect">
+        <a className="availability" href="mailto:ahmedsaaiedd@gmail.com" data-magnetic data-cursor="Connect" data-analytics-event="contact_clicked" data-analytics-source="navigation">
           <span /> Available for work
         </a>
       )}
@@ -233,7 +233,7 @@ export function SiteNav({ mode = "home", worldCount }: SiteNavProps) {
           </a>
         ))}
         {mode === "home" && (
-          <TransitionLink href="/resume" onClick={() => setOpen(false)}>
+          <TransitionLink href="/resume" onClick={() => setOpen(false)} data-analytics-event="resume_opened" data-analytics-source="mobile_menu">
             <span>05</span>
             Resume
           </TransitionLink>

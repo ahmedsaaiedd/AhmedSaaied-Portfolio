@@ -1,7 +1,7 @@
 "use client"
 
 import { useEffect, useRef, type CSSProperties, type PointerEvent } from "react"
-import { ArrowUpRight, ExternalLink } from "lucide-react"
+import { ArrowUpRight, ExternalLink, GitFork } from "lucide-react"
 import Image from "next/image"
 import Link from "next/link"
 
@@ -155,7 +155,7 @@ export function ProjectShowcase({ project, reversed = false, index, total }: Pro
           </div>
 
           <div className="project-actions">
-            <Link className="case-study-button" href={`/work/${project.id}`} data-magnetic data-cursor="Enter world">
+            <Link className="case-study-button" href={`/work/${project.id}`} data-magnetic data-cursor="Enter world" data-analytics-event="project_opened" data-analytics-project={project.id}>
               Enter project world <ArrowUpRight aria-hidden="true" />
             </Link>
             {project.liveUrl && (
@@ -166,8 +166,15 @@ export function ProjectShowcase({ project, reversed = false, index, total }: Pro
                 rel="noreferrer"
                 data-magnetic
                 data-cursor="Launch demo"
+                data-analytics-event="live_product_opened"
+                data-analytics-project={project.id}
               >
                 Live demo <ExternalLink aria-hidden="true" />
+              </a>
+            )}
+            {project.githubUrl && (
+              <a className="repository-button" href={project.githubUrl} target="_blank" rel="noreferrer" data-magnetic data-cursor="View code" data-analytics-event="project_repository_opened" data-analytics-project={project.id}>
+                Repository <GitFork aria-hidden="true" />
               </a>
             )}
           </div>

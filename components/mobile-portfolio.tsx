@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState, type CSSProperties } from "react"
 import Image from "next/image"
 import Link from "next/link"
-import { ArrowDown, ArrowUpRight, ExternalLink, MapPin } from "lucide-react"
+import { ArrowDown, ArrowUpRight, ExternalLink, GitFork, MapPin } from "lucide-react"
 
 import { projects } from "@/lib/portfolio"
 import { RotatingRole } from "@/components/rotating-role"
@@ -103,7 +103,7 @@ export function MobilePortfolio() {
 
         <div className="mobile-intro-actions">
           <a href="#mobile-work">Explore the systems <ArrowDown aria-hidden="true" /></a>
-          <a href="mailto:ahmedsaaied117@gmail.com">Start a conversation <ArrowUpRight aria-hidden="true" /></a>
+          <a href="mailto:ahmedsaaiedd@gmail.com" data-analytics-event="contact_clicked" data-analytics-source="mobile_hero">Start a conversation <ArrowUpRight aria-hidden="true" /></a>
         </div>
 
         <div className="mobile-intro-readout" aria-label="Portfolio status">
@@ -164,12 +164,17 @@ export function MobilePortfolio() {
                   <h3>{project.title}</h3>
                   <p>{project.headline}</p>
                   <div>
-                    <Link href={`/work/${project.id}`}>
+                    <Link href={`/work/${project.id}`} data-analytics-event="project_opened" data-analytics-project={project.id}>
                       Enter world <ArrowUpRight aria-hidden="true" />
                     </Link>
                     {project.liveUrl && (
-                      <a href={project.liveUrl} target="_blank" rel="noreferrer">
+                      <a href={project.liveUrl} target="_blank" rel="noreferrer" data-analytics-event="live_product_opened" data-analytics-project={project.id}>
                         Live product <ExternalLink aria-hidden="true" />
+                      </a>
+                    )}
+                    {project.githubUrl && (
+                      <a href={project.githubUrl} target="_blank" rel="noreferrer" data-analytics-event="project_repository_opened" data-analytics-project={project.id}>
+                        Repository <GitFork aria-hidden="true" />
                       </a>
                     )}
                   </div>

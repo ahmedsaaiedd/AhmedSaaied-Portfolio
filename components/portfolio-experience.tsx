@@ -49,7 +49,7 @@ export function PortfolioExperience() {
               <a className="primary-action" href="#work" data-magnetic data-cursor="Explore">
                 Explore selected work <ArrowDownRight aria-hidden="true" />
               </a>
-              <a className="text-action" href="mailto:ahmedsaaied117@gmail.com" data-magnetic data-cursor="Connect">
+              <a className="text-action" href="mailto:ahmedsaaiedd@gmail.com" data-magnetic data-cursor="Connect" data-analytics-event="contact_clicked" data-analytics-source="hero">
                 Start a conversation <ArrowRight aria-hidden="true" />
               </a>
             </div>

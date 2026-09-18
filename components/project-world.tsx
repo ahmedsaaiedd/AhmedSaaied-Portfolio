@@ -1,5 +1,5 @@
 import type { CSSProperties } from "react"
-import { ArrowRight, ExternalLink } from "lucide-react"
+import { ArrowRight, ExternalLink, GitFork } from "lucide-react"
 import Link from "next/link"
 
 import { AmbientEffects } from "@/components/ambient-effects"
@@ -146,10 +146,19 @@ export function ProjectWorld({ project, nextProject, total }: ProjectWorldProps)
             <strong>{project.role}</strong>
           </div>
         </div>
-        {project.liveUrl && (
-          <a className="world-live-demo" href={project.liveUrl} target="_blank" rel="noreferrer" data-cursor="Launch demo">
-            Launch live product <ExternalLink aria-hidden="true" />
-          </a>
+        {(project.liveUrl || project.githubUrl) && (
+          <div className="world-external-actions">
+            {project.liveUrl && (
+              <a className="world-live-demo" href={project.liveUrl} target="_blank" rel="noreferrer" data-cursor="Launch demo" data-analytics-event="live_product_opened" data-analytics-project={project.id}>
+                Launch live product <ExternalLink aria-hidden="true" />
+              </a>
+            )}
+            {project.githubUrl && (
+              <a className="world-repository" href={project.githubUrl} target="_blank" rel="noreferrer" data-cursor="View code" data-analytics-event="project_repository_opened" data-analytics-project={project.id}>
+                View repository <GitFork aria-hidden="true" />
+              </a>
+            )}
+          </div>
         )}
       </section>
 

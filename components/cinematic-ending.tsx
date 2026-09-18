@@ -82,17 +82,17 @@ export function CinematicEnding() {
             Tell me what you&apos;re building, where it becomes difficult, and what needs to work better. I can help define the system, design the interface, and build the product.
           </p>
           <div className="ending-actions">
-            <a className="ending-primary-action" href="mailto:ahmedsaaied117@gmail.com" data-magnetic data-cursor="Send mail">
+            <a className="ending-primary-action" href="mailto:ahmedsaaiedd@gmail.com" data-magnetic data-cursor="Send mail" data-analytics-event="contact_clicked" data-analytics-source="contact_section">
               <Mail aria-hidden="true" /> Start a conversation <ArrowUpRight aria-hidden="true" />
             </a>
             <div className="ending-link-rail">
-              <a href="https://www.linkedin.com/in/ahmed-saaied-904a23372" target="_blank" rel="noreferrer" data-cursor="LinkedIn">
+              <a href="https://www.linkedin.com/in/ahmed-saaied-904a23372" target="_blank" rel="noreferrer" data-cursor="LinkedIn" data-analytics-event="social_clicked" data-analytics-network="linkedin">
                 <LinkIcon aria-hidden="true" /> LinkedIn
               </a>
-              <TransitionLink href="/resume" data-cursor="Resume">
+              <TransitionLink href="/resume" data-cursor="Resume" data-analytics-event="resume_opened" data-analytics-source="contact_section">
                 <FileText aria-hidden="true" /> Resume
               </TransitionLink>
-              <a href="https://github.com/ahmedsaaiedd" target="_blank" rel="noreferrer" data-cursor="GitHub">
+              <a href="https://github.com/ahmedsaaiedd" target="_blank" rel="noreferrer" data-cursor="GitHub" data-analytics-event="social_clicked" data-analytics-network="github">
                 <GitFork aria-hidden="true" /> GitHub
               </a>
             </div>
