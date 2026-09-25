@@ -30,12 +30,14 @@ export function SiteNav({ mode = "home", worldCount }: SiteNavProps) {
   const links = mode === "world" ? worldLinks : homeLinks
   const [open, setOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
+  const [navCompact, setNavCompact] = useState(false)
   const [active, setActive] = useState(mode === "world" ? "#top" : "#work")
   const [dockVisible, setDockVisible] = useState(true)
   const scrolledRef = useRef(false)
   const activeRef = useRef(mode === "world" ? "#top" : "#work")
   const dockHideTimer = useRef<number | null>(null)
   const lastDockScrollY = useRef(0)
+  const lastDesktopScrollY = useRef(0)
 
   const wakeDock = useCallback(() => {
     const mobile = window.matchMedia("(max-width: 54rem)").matches
@@ -100,7 +102,8 @@ export function SiteNav({ mode = "home", worldCount }: SiteNavProps) {
 
   useEffect(() => {
     const onScroll = () => {
-      const nextScrolled = window.scrollY > 40
+      const nextY = Math.max(window.scrollY, 0)
+      const nextScrolled = nextY > 40
       if (nextScrolled === scrolledRef.current) return
       scrolledRef.current = nextScrolled
       setScrolled(nextScrolled)
@@ -143,6 +146,47 @@ export function SiteNav({ mode = "home", worldCount }: SiteNavProps) {
     }
   }, [links])
 
+  useEffect(() => {
+    const desktopQuery = window.matchMedia("(min-width: 54.01rem)")
+    let frame = 0
+
+    const updateNavShape = () => {
+      frame = 0
+
+      if (!desktopQuery.matches) {
+        setNavCompact(false)
+        lastDesktopScrollY.current = Math.max(window.scrollY, 0)
+        return
+      }
+
+      const nextY = Math.max(window.scrollY, 0)
+      const delta = nextY - lastDesktopScrollY.current
+
+      if (nextY <= 56) {
+        setNavCompact(false)
+      } else if (Math.abs(delta) >= 10) {
+        setNavCompact(delta > 0)
+      }
+
+      lastDesktopScrollY.current = nextY
+    }
+
+    const scheduleUpdate = () => {
+      if (!frame) frame = requestAnimationFrame(updateNavShape)
+    }
+
+    lastDesktopScrollY.current = Math.max(window.scrollY, 0)
+    window.addEventListener("scroll", scheduleUpdate, { passive: true })
+    desktopQuery.addEventListener("change", scheduleUpdate)
+    updateNavShape()
+
+    return () => {
+      window.removeEventListener("scroll", scheduleUpdate)
+      desktopQuery.removeEventListener("change", scheduleUpdate)
+      cancelAnimationFrame(frame)
+    }
+  }, [])
+
   const openCommands = () => {
     setOpen(false)
     window.dispatchEvent(new Event("portfolio:command"))
@@ -175,7 +219,7 @@ export function SiteNav({ mode = "home", worldCount }: SiteNavProps) {
 
 
   return (
-    <header className="site-header" data-scrolled={scrolled} data-mode={mode}>
+    <header className="site-header" data-scrolled={scrolled} data-compact={navCompact} data-mode={mode}>
       <Link className="monogram" href={mode === "world" ? "/" : "#top"} aria-label="Ahmed Saaied, home">
         AS<span>.</span>
       </Link>
@@ -196,6 +240,23 @@ export function SiteNav({ mode = "home", worldCount }: SiteNavProps) {
           </button>
         )}
       </nav>
+
+      <div className="nav-signal" aria-hidden={!navCompact}>
+        <span className="nav-signal-index">{String(links.findIndex((link) => link.href === active) + 1).padStart(2, "0")}</span>
+        <strong>{links.find((link) => link.href === active)?.label ?? links[0].label}</strong>
+        <span className="nav-signal-track" aria-hidden="true">
+          <i style={{ width: `${((links.findIndex((link) => link.href === active) + 1) / links.length) * 100}%` }} />
+        </span>
+        {mode === "home" ? (
+          <button type="button" onClick={openCommands} aria-label="Open command center">
+            <Command aria-hidden="true" />
+          </button>
+        ) : (
+          <Link href="/#work" aria-label="Return to all work">
+            <ArrowLeft aria-hidden="true" />
+          </Link>
+        )}
+      </div>
 
       {mode === "world" ? (
         <Link className="world-nav-return" href="/#work" data-cursor="All projects">
